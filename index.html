@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geoshippings Logistics — Professional Express Courier & Global Logistics</title>
+    <meta name="description" content="Moving Your World, One Delivery at a Time. Fast, secure, and reliable international express shipping, air freight, warehousing, and parcel tracking.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Modern Design System & CSS Variables */
+        :root {
+            --primary-navy: #102A43;
+            --royal-blue: #1769FF;
+            --bright-cyan: #27C2E5;
+            --light-bg: #F5F8FC;
+            --dark-text: #182230;
+            --muted-gray: #667085;
+            --white: #FFFFFF;
+            --success-green: #16A34A;
+            --warning-amber: #D97706;
+            --danger-red: #DC2626;
+            --border-color: #E2E8F0;
+            --card-shadow: 0 10px 30px rgba(16, 42, 67, 0.06);
+            --hover-shadow: 0 18px 40px rgba(23, 105, 255, 0.12);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 18px;
+            --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--dark-text);
+            background-color: #FFFFFF;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Top Announcement Bar */
+        .top-bar {
+            background: var(--primary-navy);
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 0.85rem;
+            padding: 8px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .top-bar-info {
+            display: flex;
+            gap: 20px;
+        }
+
+        .top-bar-info span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Header & Navigation */
+        header {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(16, 42, 67, 0.05);
+            transition: var(--transition);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 5%;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 800;
+            font-size: 1.35rem;
+            color: var(--primary-navy);
+            letter-spacing: -0.5px;
+        }
+
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, var(--royal-blue), var(--bright-cyan));
+            color: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            box-shadow: 0 4px 12px rgba(23, 105, 255, 0.25);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--dark-text);
+            transition: var(--transition);
+            position: relative;
+            padding: 6px 0;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--royal-blue);
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--royal-blue);
+            border-radius: 2px;
+        }
+
+        /* Services Dropdown Menu */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 230px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+            border-radius: var(--radius-sm);
+            padding: 10px 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu a {
+            padding: 10px 20px;
+            display: block;
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: var(--dark-text);
+        }
+
+        .dropdown-menu a:hover {
+            background: var(--light-bg);
+            color: var(--royal-blue);
+        }
+
+        /* Header CTA Button */
+        .btn-header {
+            background: var(--royal-blue);
+            color: white !important;
+            padding: 10px 22px;
+            border-radius: var(--radius-sm);
+            box-shadow: 0 4px 14px rgba(23, 105, 255, 0.3);
+            font-weight: 700 !important;
+            transition: var(--transition);
+        }
+
+        .btn-header:hover {
+            background: #0052e0 !important;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(23, 105, 255, 0.4);
+        }
+
+        .mobile-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-navy);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(16, 42, 67, 0.92) 0%, rgba(16, 42, 67, 0.8) 100%), 
+                        url('https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+            color: white;
+            padding: 90px 5% 110px;
+            position: relative;
+        }
+
+        .hero-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .hero-content h1 span {
+            color: var(--bright-cyan);
+        }
+
+        .hero-content p {
+            font-size: 1.15rem;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 30px;
+            max-width: 540px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--royal-blue);
+            color: white;
+            padding: 14px 28px;
+            border-radius: var(--radius-sm);
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 6px 20px rgba(23, 105, 255, 0.35);
+            transition: var(--transition);
+        }
+
+        .btn-primary:hover {
+            background: #0052e0;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.12);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(5px);
+            padding: 14px 28px;
+            border-radius: var(--radius-sm);
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: var(--transition);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Tracking Card Component */
+        .hero-tracking-card {
+            background: white;
+            color: var(--dark-text);
+            padding: 35px;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+        }
+
+        .tracking-card-header {
+            margin-bottom: 20px;
+        }
+
+        .tracking-card-header h3 {
+            font-size: 1.4rem;
+            color: var(--primary-navy);
+            font-weight: 800;
+            margin-bottom: 6px;
+        }
+
+        .tracking-card-header p {
+            font-size: 0.88rem;
+            color: var(--muted-gray);
+        }
+
+        .tracking-input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .tracking-input-group input {
+            flex: 1;
+            padding: 14px 18px;
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            font-size: 0.95rem;
+            font-family: inherit;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .tracking-input-group input:focus {
+            border-color: var(--royal-blue);
+        }
+
+        .tracking-input-group button {
+            background: var(--primary-navy);
+            color: white;
+            border: none;
+            padding: 14px 24px;
+            border-radius: var(--radius-sm);
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tracking-input-group button:hover {
+            background: var(--royal-blue);
+        }
+
+        .sample-pills {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--muted-gray);
+        }
+
+        .sample-pill {
+            background: var(--light-bg);
+            padding: 4px 10px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary-navy);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .sample-pill:hover {
+            background: var(--royal-blue);
+            color: white;
+            border-color: var(--royal-blue);
+        }
+
+        /* Tracking Result Dynamic Area */
+        .tracking-result-box {
+            margin-top: 20px;
+            padding: 20px;
+            background: var(--light-bg);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .status-in-transit { background: #E0F2FE; color: #0369A1; }
+        .status-delivered { background: #DCFCE7; color: #15803D; }
+        .status-processing { background: #FEF3C7; color: #B45309; }
+        .status-exception { background: #FEE2E2; color: #B91C1C; }
+
+        /* General Section Layout */
+        .section-padding {
+            padding: 90px 5%;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 55px;
+        }
+
+        .section-tag {
+            color: var(--royal-blue);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1.5px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .section-title {
+            font-size: 2.3rem;
+            color: var(--primary-navy);
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 15px;
+        }
+
+        .section-subtitle {
+            color: var(--muted-gray);
+            font-size: 1.05rem;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            padding: 35px 30px;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--hover-shadow);
+            border-color: rgba(23, 105, 255, 0.3);
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(23, 105, 255, 0.08);
+            color: var(--royal-blue);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            margin-bottom: 24px;
+        }
+
+        .service-card h3 {
+            font-size: 1.25rem;
+            color: var(--primary-navy);
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .service-card p {
+            color: var(--muted-gray);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .service-link {
+            color: var(--royal-blue);
+            font-weight: 700;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: var(--transition);
+        }
+
+        .service-link:hover {
+            gap: 10px;
+        }
+
+        /* How It Works Section */
+        .how-it-works {
+            background: var(--light-bg);
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 30px;
+            position: relative;
+        }
+
+        .step-card {
+            background: white;
+            padding: 30px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--card-shadow);
+            position: relative;
+            border: 1px solid var(--border-color);
+        }
+
+        .step-num {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2rem;
+            font-weight: 800;
+            color: rgba(23, 105, 255, 0.15);
+        }
+
+        .step-card h4 {
+            font-size: 1.15rem;
+            color: var(--primary-navy);
+            margin: 15px 0 10px;
+            font-weight: 700;
+        }
+
+        .step-card p {
+            color: var(--muted-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Statistics Counter Section */
+        .stats-strip {
+            background: var(--primary-navy);
+            color: white;
+            padding: 60px 5%;
+        }
+
+        .stats-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .stat-box h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--bright-cyan);
+            margin-bottom: 5px;
+        }
+
+        .stat-box p {
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .stat-disclaimer {
+            text-align: center;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.4);
+            margin-top: 30px;
+        }
+
+        /* CTA Banner */
+        .cta-section {
+            padding: 80px 5%;
+        }
+
+        .cta-card {
+            background: linear-gradient(135deg, var(--royal-blue) 0%, #0d4bc3 100%);
+            color: white;
+            border-radius: var(--radius-lg);
+            padding: 60px 40px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(23, 105, 255, 0.3);
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .cta-card h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .cta-card p {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            font-size: 1.05rem;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            background: #0B1D2D;
+            color: rgba(255, 255, 255, 0.75);
+            padding: 80px 5% 30px;
+            font-size: 0.92rem;
+        }
+
+        .footer-grid {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 50px;
+            margin-bottom: 60px;
+        }
+
+        .footer-col h4 {
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 22px;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-links a {
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--bright-cyan);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: var(--transition);
+        }
+
+        .social-icons a:hover {
+            background: var(--royal-blue);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-content p {
+                margin: 0 auto 30px;
+            }
+
+            .hero-actions {
+                justify-content: center;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: white;
+                flex-direction: column;
+                padding: 40px;
+                transition: 0.4s ease;
+                align-items: flex-start;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .mobile-toggle {
+                display: block;
+            }
+
+            .top-bar-info span:nth-child(2) {
+                display: none;
+            }
+
+            .hero-content h1 {
+                font-size: 2.3rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Announcement Bar -->
+    <div class="top-bar">
+        <span><i class="fa-solid fa-shield-halved"></i> Reliable Deliveries. Worldwide Connections.</span>
+        <div class="top-bar-info">
+            <span><i class="fa-solid fa-headset"></i> Support: +1 (800) 555-GEO</span>
+            <span><i class="fa-solid fa-globe"></i> Global Express Shipping</span>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                <div class="logo-icon"><i class="fa-solid fa-plane-departure"></i></div>
+                <span>Geoshippings</span>
+            </a>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li class="dropdown">
+                    <a href="services.html">Services <i class="fa-solid fa-chevron-down" style="font-size:0.75rem;"></i></a>
+                    <div class="dropdown-menu">
+                        <a href="services.html#express">Express Delivery</a>
+                        <a href="services.html#international">International Cargo</a>
+                        <a href="services.html#ecommerce">E-commerce Fulfillment</a>
+                        <a href="services.html#warehousing">Warehousing</a>
+                    </div>
+                </li>
+                <li><a href="tracking.html">Track Shipment</a></li>
+                <li><a href="calculator.html">Shipping Calculator</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="quote.html" class="btn-header">Book a Shipment</a></li>
+            </ul>
+
+            <div class="mobile-toggle" id="mobileToggle">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Hero Section with Tracking Card -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Delivering Beyond <span>Boundaries.</span></h1>
+                <p>Fast, secure, and transparent international courier & cargo services. Moving your world with guaranteed precision and real-time tracking.</p>
+                <div class="hero-actions">
+                    <a href="tracking.html" class="btn-primary"><i class="fa-solid fa-location-dot"></i> Track Shipment</a>
+                    <a href="calculator.html" class="btn-secondary"><i class="fa-solid fa-calculator"></i> Calculate Cost</a>
+                </div>
+            </div>
+
+            <!-- Shipment Tracking Component inside Hero -->
+            <div class="hero-tracking-card">
+                <div class="tracking-card-header">
+                    <h3>Track Your Package</h3>
+                    <p>Enter your unique shipment reference number below:</p>
+                </div>
+
+                <form id="heroTrackingForm" onsubmit="handleHeroTracking(event)">
+                    <div class="tracking-input-group">
+                        <input type="text" id="heroTrackingInput" placeholder="e.g. GEO123456789" required autocomplete="off">
+                        <button type="submit"><i class="fa-solid fa-magnifying-glass"></i> Track</button>
+                    </div>
+                </form>
+
+                <div class="sample-pills">
+                    <span>Try sample code:</span>
+                    <span class="sample-pill" onclick="fillTracking('GEO123456789')">GEO123456789</span>
+                    <span class="sample-pill" onclick="fillTracking('GEO987654321')">GEO987654321</span>
+                    <span class="sample-pill" onclick="fillTracking('GEO456789123')">GEO456789123</span>
+                </div>
+
+                <!-- Dynamic Results Display Area -->
+                <div id="heroTrackingResult" class="tracking-result-box"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Overview Section -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">What We Do</span>
+                <h2 class="section-title">Comprehensive Logistics Solutions</h2>
+                <p class="section-subtitle">Tailored air, sea, and land logistics tailored for modern commercial supply chains and individual deliveries.</p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon"><i class="fa-solid fa-bolt"></i></div>
+                    <h3>Express Parcel Delivery</h3>
+                    <p>Time-critical door-to-door courier deliveries with priority handling and guaranteed arrival windows.</p>
+                    <a href="services.html#express" class="service-link">Explore Express <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon"><i class="fa-solid fa-plane-up"></i></div>
+                    <h3>International Air Freight</h3>
+                    <p>Global cargo consolidation and air shipping solutions connecting over 150+ international trade hubs.</p>
+                    <a href="services.html#air" class="service-link">Explore Freight <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon"><i class="fa-solid fa-boxes-packing"></i></div>
+                    <h3>E-Commerce Fulfillment</h3>
+                    <p>Integrated warehousing, pick-and-pack services, and last-mile logistics for online retailers.</p>
+                    <a href="services.html#fulfillment" class="service-link">Explore Fulfillment <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon"><i class="fa-solid fa-warehouse"></i></div>
+                    <h3>Warehousing & Distribution</h3>
+                    <p>Secure climate-controlled inventory storage, automated stock management, and bulk freight distribution.</p>
+                    <a href="services.html#warehousing" class="service-link">Explore Warehousing <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="section-padding how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Simple Process</span>
+                <h2 class="section-title">How Your Shipment Moves</h2>
+                <p class="section-subtitle">A seamless 4-step logistics flow designed to ensure security, clarity, and speed.</p>
+            </div>
+
+            <div class="steps-grid">
+                <div class="step-card">
+                    <span class="step-num">01</span>
+                    <div class="service-icon" style="margin-bottom: 10px;"><i class="fa-solid fa-file-signature"></i></div>
+                    <h4>1. Book Delivery</h4>
+                    <p>Submit package specs, pickup location, and destination via our online quote booking wizard.</p>
+                </div>
+
+                <div class="step-card">
+                    <span class="step-num">02</span>
+                    <div class="service-icon" style="margin-bottom: 10px;"><i class="fa-solid fa-truck-ramp-box"></i></div>
+                    <h4>2. Package Pickup</h4>
+                    <p>Our courier collects your item directly from your doorstep or commercial warehouse terminal.</p>
+                </div>
+
+                <div class="step-card">
+                    <span class="step-num">03</span>
+                    <div class="service-icon" style="margin-bottom: 10px;"><i class="fa-solid fa-route"></i></div>
+                    <h4>3. Real-Time Tracking</h4>
+                    <p>Monitor your package live at every sorting terminal, airport checkpoint, and customs hub.</p>
+                </div>
+
+                <div class="step-card">
+                    <span class="step-num">04</span>
+                    <div class="service-icon" style="margin-bottom: 10px;"><i class="fa-solid fa-house-circle-check"></i></div>
+                    <h4>4. Doorstep Delivery</h4>
+                    <p>Your recipient receives the shipment safely with digitized proof of signature confirmation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="stats-strip">
+        <div class="stats-container">
+            <div class="stat-box">
+                <h2>99.4%</h2>
+                <p>On-Time Delivery Rate</p>
+            </div>
+            <div class="stat-box">
+                <h2>150+</h2>
+                <p>Global Destination Countries</p>
+            </div>
+            <div class="stat-box">
+                <h2>2.5M+</h2>
+                <p>Packages Handled Annually</p>
+            </div>
+            <div class="stat-box">
+                <h2>24/7</h2>
+                <p>Dedicated Customer Support</p>
+            </div>
+        </div>
+        <p class="stat-disclaimer">* Stat figures represent illustrative benchmark targets for frontend demonstration purposes.</p>
+    </section>
+
+    <!-- Call To Action Section -->
+    <section class="cta-section">
+        <div class="cta-card">
+            <h2>Ready to Transport Cargo or Packages?</h2>
+            <p>Get an instant cost estimate with our interactive calculator or initiate a courier booking right now.</p>
+            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                <a href="quote.html" class="btn-primary" style="background: white; color: var(--royal-blue);"><i class="fa-solid fa-paper-plane"></i> Book a Shipment</a>
+                <a href="calculator.html" class="btn-secondary"><i class="fa-solid fa-calculator"></i> Estimate Cost</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <a href="index.html" class="logo" style="color: white; margin-bottom: 18px;">
+                    <div class="logo-icon"><i class="fa-solid fa-plane-departure"></i></div>
+                    <span>Geoshippings</span>
+                </a>
+                <p style="margin-top: 15px;">Moving Your World, One Delivery at a Time. Reliable global courier, express freight, and logistics management.</p>
+            </div>
+
+            <div class="footer-col">
+                <h4>Quick Navigation</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="services.html">Services Overview</a></li>
+                    <li><a href="tracking.html">Track Shipment</a></li>
+                    <li><a href="calculator.html">Rate Calculator</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Support</h4>
+                <ul class="footer-links">
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="faq.html">Frequently Asked Questions</a></li>
+                    <li><a href="quote.html">Book Delivery</a></li>
+                    <li><a href="404.html">System Status</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Company Info</h4>
+                <p><i class="fa-solid fa-location-dot" style="margin-right: 8px;"></i> International Freight Terminal</p>
+                <p style="margin-top: 10px;"><i class="fa-solid fa-envelope" style="margin-right: 8px;"></i> support@geoshippings-demo.com</p>
+                <p style="margin-top: 10px;"><i class="fa-solid fa-phone" style="margin-right: 8px;"></i> +1 (800) 555-GEO-SHIP</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div>&copy; 2026 Geoshippings Logistics. All rights reserved. (Frontend Demonstration Website)</div>
+            <div class="social-icons">
+                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Navigation & Tracking JavaScript -->
+    <script>
+        // Sample Shipment Database
+        const trackingDB = {
+            'GEO123456789': { status: 'In Transit', origin: 'London, UK', dest: 'New York, USA', eta: 'Oct 20, 2026', type: 'status-in-transit' },
+            'GEO987654321': { status: 'Out for Delivery', origin: 'Frankfurt, DE', dest: 'Toronto, CA', eta: 'Today', type: 'status-delivered' },
+            'GEO456789123': { status: 'Delivered', origin: 'Tokyo, JP', dest: 'Sydney, AU', eta: 'Oct 14, 2026', type: 'status-delivered' },
+            'GEO111222333': { status: 'Shipment Processing', origin: 'Dubai, UAE', dest: 'Paris, FR', eta: 'Oct 24, 2026', type: 'status-processing' },
+            'GEO000000000': { status: 'Customs Delay (Exception)', origin: 'Singapore', dest: 'Berlin, DE', eta: 'Pending Review', type: 'status-exception' }
+        };
+
+        // Fill sample pill tracking code into input
+        function fillTracking(code) {
+            document.getElementById('heroTrackingInput').value = code;
+        }
+
+        // Handle Tracking Form Search
+        function handleHeroTracking(e) {
+            e.preventDefault();
+            const code = document.getElementById('heroTrackingInput').value.trim().toUpperCase();
+            const resultBox = document.getElementById('heroTrackingResult');
+
+            resultBox.style.display = 'block';
+
+            if (trackingDB[code]) {
+                const data = trackingDB[code];
+                resultBox.innerHTML = `
+                    <span class="status-badge ${data.type}">${data.status}</span>
+                    <h4 style="font-weight:700; color: var(--primary-navy); margin-bottom: 6px;">Ref: ${code}</h4>
+                    <p style="font-size:0.85rem; color:var(--dark-text);"><strong>Origin:</strong> ${data.origin} &rarr; <strong>Dest:</strong> ${data.dest}</p>
+                    <p style="font-size:0.85rem; color:var(--muted-gray); margin-top:4px;">Estimated Arrival: <strong>${data.eta}</strong></p>
+                    <a href="tracking.html?code=${code}" style="display:inline-block; margin-top:10px; font-size:0.85rem; font-weight:700; color:var(--royal-blue);">View Full Timeline &rarr;</a>
+                `;
+            } else {
+                resultBox.innerHTML = `
+                    <span class="status-badge status-exception">Not Found</span>
+                    <p style="font-size:0.85rem; color:var(--dark-text);">No shipment matching "<strong>${code}</strong>" was found.</p>
+                    <p style="font-size:0.8rem; color:var(--muted-gray); margin-top:4px;">Please check the reference number or try <strong>GEO123456789</strong>.</p>
+                `;
+            }
+        }
+
+        // Mobile Nav Drawer Toggle
+        const mobileToggle = document.getElementById('mobileToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        if (mobileToggle) {
+            mobileToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                const icon = mobileToggle.querySelector('i');
+                if (navLinks.classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-xmark');
+                } else {
+                    icon.classList.remove('fa-xmark');
+                    icon.classList.add('fa-bars');
+                }
+            });
+        }
+
+        // Universal Navigation Handler (Ensures links work seamless whether on a web server or opened directly)
+        document.addEventListener('DOMContentLoaded', () => {
+            const allLinks = document.querySelectorAll('a[href]');
+            allLinks.forEach(link => {
+                const href = link.getAttribute('href');
+                // Ensure clicking active links or hashes smoothly scrolls or navigates
+                if (href.startsWith('#')) {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const target = document.querySelector(href);
+                        if (target) {
+                            target.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

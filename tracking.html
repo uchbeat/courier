@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Shipment — Geoshippings Logistics</title>
+    <meta name="description" content="Track your Geoshippings Logistics shipments in real-time. Enter your tracking number for live status updates, origin, destination, and estimated delivery times.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-navy: #102A43;
+            --royal-blue: #1769FF;
+            --bright-cyan: #27C2E5;
+            --light-bg: #F5F8FC;
+            --dark-text: #182230;
+            --muted-gray: #667085;
+            --white: #FFFFFF;
+            --success-green: #16A34A;
+            --warning-amber: #D97706;
+            --danger-red: #DC2626;
+            --border-color: #E2E8F0;
+            --card-shadow: 0 10px 30px rgba(16, 42, 67, 0.06);
+            --hover-shadow: 0 18px 40px rgba(23, 105, 255, 0.12);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 18px;
+            --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--dark-text);
+            background-color: #FFFFFF;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* Top Bar */
+        .top-bar {
+            background: var(--primary-navy);
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 0.85rem;
+            padding: 8px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .top-bar-info { display: flex; gap: 20px; }
+        .top-bar-info span { display: flex; align-items: center; gap: 6px; }
+
+        /* Navigation */
+        header {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(16, 42, 67, 0.05);
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 5%;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 800;
+            font-size: 1.35rem;
+            color: var(--primary-navy);
+        }
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, var(--royal-blue), var(--bright-cyan));
+            color: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+        .nav-links { display: flex; gap: 28px; align-items: center; }
+        .nav-links a {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--dark-text);
+            transition: var(--transition);
+        }
+        .nav-links a:hover, .nav-links a.active { color: var(--royal-blue); }
+        .dropdown { position: relative; }
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 230px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+            border-radius: var(--radius-sm);
+            padding: 10px 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+        }
+        .dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+        .dropdown-menu a { padding: 10px 20px; display: block; font-weight: 500; font-size: 0.9rem; }
+        .dropdown-menu a:hover { background: var(--light-bg); color: var(--royal-blue); }
+        .btn-header {
+            background: var(--royal-blue);
+            color: white !important;
+            padding: 10px 22px;
+            border-radius: var(--radius-sm);
+            box-shadow: 0 4px 14px rgba(23, 105, 255, 0.3);
+            font-weight: 700 !important;
+        }
+        .btn-header:hover { background: #0052e0 !important; transform: translateY(-2px); }
+        .mobile-toggle { display: none; font-size: 1.5rem; cursor: pointer; color: var(--primary-navy); }
+
+        /* Page Banner */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-navy) 0%, #1a365d 100%);
+            color: white;
+            padding: 60px 5% 70px;
+            text-align: center;
+        }
+        .page-header h1 { font-size: 2.8rem; font-weight: 800; margin: 0 0 10px; }
+        .breadcrumbs { display: flex; justify-content: center; gap: 10px; font-size: 0.9rem; color: rgba(255,255,255,0.7); }
+        .breadcrumbs a { color: var(--bright-cyan); }
+
+        /* Main Container */
+        .container { max-width: 1000px; margin: 0 auto; padding: 60px 5%; }
+
+        /* Search Card */
+        .search-card {
+            background: white;
+            padding: 40px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--card-shadow);
+            border: 1px solid var(--border-color);
+            margin-top: -90px;
+            position: relative;
+            z-index: 10;
+        }
+        .search-title { font-size: 1.4rem; font-weight: 800; color: var(--primary-navy); margin-bottom: 8px; }
+        .search-desc { color: var(--muted-gray); font-size: 0.92rem; margin-bottom: 20px; }
+
+        .search-form-group { display: flex; gap: 12px; }
+        .search-form-group input {
+            flex: 1;
+            padding: 16px 20px;
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            font-size: 1rem;
+            font-family: inherit;
+            outline: none;
+            transition: var(--transition);
+        }
+        .search-form-group input:focus { border-color: var(--royal-blue); }
+        .search-form-group button {
+            background: var(--royal-blue);
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            border-radius: var(--radius-sm);
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .search-form-group button:hover { background: #0052e0; }
+
+        /* Quick Pills */
+        .sample-pills-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 18px;
+            flex-wrap: wrap;
+            font-size: 0.85rem;
+            color: var(--muted-gray);
+        }
+        .sample-pill {
+            background: var(--light-bg);
+            border: 1px solid var(--border-color);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            color: var(--primary-navy);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .sample-pill:hover { background: var(--royal-blue); color: white; border-color: var(--royal-blue); }
+
+        /* Loading Spinner Animation */
+        .loader-box {
+            text-align: center;
+            padding: 50px 20px;
+            display: none;
+        }
+        .spinner {
+            width: 45px;
+            height: 45px;
+            border: 4px solid var(--border-color);
+            border-top: 4px solid var(--royal-blue);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* Tracking Results Layout */
+        .result-panel {
+            display: none;
+            margin-top: 40px;
+            animation: fadeIn 0.4s ease;
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+        .status-header-card {
+            background: white;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            padding: 30px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 30px;
+        }
+        .status-top-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .status-badge-lg {
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-weight: 800;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .badge-in-transit { background: #E0F2FE; color: #0369A1; }
+        .badge-delivered { background: #DCFCE7; color: #15803D; }
+        .badge-processing { background: #FEF3C7; color: #B45309; }
+        .badge-exception { background: #FEE2E2; color: #B91C1C; }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        .detail-item span { font-size: 0.8rem; color: var(--muted-gray); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; display: block; margin-bottom: 4px; }
+        .detail-item strong { font-size: 1rem; color: var(--primary-navy); }
+
+        /* Step Progress Bar */
+        .progress-bar-container {
+            margin: 30px 0;
+            position: relative;
+        }
+        .progress-track {
+            height: 6px;
+            background: var(--border-color);
+            border-radius: 3px;
+            position: relative;
+            margin: 0 40px;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--royal-blue), var(--bright-cyan));
+            border-radius: 3px;
+            width: 0%;
+            transition: width 0.8s ease;
+        }
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            top: -20px;
+        }
+        .step-point {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            color: var(--muted-gray);
+            transition: var(--transition);
+        }
+        .step-point.active {
+            border-color: var(--royal-blue);
+            background: var(--royal-blue);
+            color: white;
+        }
+        .step-point.completed {
+            border-color: var(--success-green);
+            background: var(--success-green);
+            color: white;
+        }
+
+        /* Timeline Section */
+        .timeline-card {
+            background: white;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            padding: 35px;
+            box-shadow: var(--card-shadow);
+        }
+        .timeline-card h3 { font-size: 1.25rem; color: var(--primary-navy); margin-bottom: 25px; font-weight: 800; }
+
+        .timeline-list {
+            position: relative;
+            padding-left: 25px;
+            border-left: 2px solid var(--border-color);
+        }
+        .timeline-event {
+            position: relative;
+            margin-bottom: 30px;
+        }
+        .timeline-event:last-child { margin-bottom: 0; }
+        .timeline-dot {
+            position: absolute;
+            left: -32px;
+            top: 2px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--border-color);
+            border: 3px solid white;
+            box-shadow: 0 0 0 2px var(--border-color);
+        }
+        .timeline-event.active .timeline-dot {
+            background: var(--royal-blue);
+            box-shadow: 0 0 0 2px var(--royal-blue);
+        }
+        .timeline-event.completed .timeline-dot {
+            background: var(--success-green);
+            box-shadow: 0 0 0 2px var(--success-green);
+        }
+        .timeline-time { font-size: 0.8rem; color: var(--muted-gray); font-weight: 600; margin-bottom: 4px; }
+        .timeline-title { font-size: 0.98rem; font-weight: 700; color: var(--primary-navy); }
+        .timeline-location { font-size: 0.88rem; color: var(--muted-gray); }
+
+        /* Error / Not Found Box */
+        .error-panel {
+            display: none;
+            background: white;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            padding: 40px;
+            text-align: center;
+            box-shadow: var(--card-shadow);
+            margin-top: 40px;
+        }
+        .error-icon {
+            width: 65px;
+            height: 65px;
+            background: #FEE2E2;
+            color: var(--danger-red);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin: 0 auto 20px;
+        }
+
+        /* Disclaimer Box */
+        .demo-disclaimer {
+            background: var(--light-bg);
+            border: 1px solid var(--border-color);
+            padding: 16px 20px;
+            border-radius: var(--radius-sm);
+            margin-top: 40px;
+            font-size: 0.82rem;
+            color: var(--muted-gray);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* Footer */
+        footer {
+            background: #0B1D2D;
+            color: rgba(255, 255, 255, 0.75);
+            padding: 80px 5% 30px;
+            font-size: 0.92rem;
+            margin-top: 80px;
+        }
+        .footer-grid {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 50px;
+            margin-bottom: 60px;
+        }
+        .footer-col h4 { color: white; font-size: 1.1rem; font-weight: 700; margin-bottom: 22px; }
+        .footer-links { display: flex; flex-direction: column; gap: 12px; }
+        .footer-links a:hover { color: var(--bright-cyan); padding-left: 5px; }
+        .footer-bottom {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .search-form-group { flex-direction: column; }
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: white;
+                flex-direction: column;
+                padding: 40px;
+                transition: 0.4s ease;
+                align-items: flex-start;
+            }
+            .nav-links.active { left: 0; }
+            .mobile-toggle { display: block; }
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Announcement Bar -->
+    <div class="top-bar">
+        <span><i class="fa-solid fa-shield-halved"></i> Reliable Deliveries. Worldwide Connections.</span>
+        <div class="top-bar-info">
+            <span><i class="fa-solid fa-headset"></i> Tracking Support</span>
+            <span><i class="fa-solid fa-globe"></i> Global Coverage</span>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                <div class="logo-icon"><i class="fa-solid fa-plane-departure"></i></div>
+                <span>Geoshippings</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li class="dropdown">
+                    <a href="services.html">Services <i class="fa-solid fa-chevron-down" style="font-size:0.75rem;"></i></a>
+                    <div class="dropdown-menu">
+                        <a href="services.html#express">Express Courier</a>
+                        <a href="services.html#international">Air Cargo</a>
+                        <a href="services.html#ocean">Ocean Freight</a>
+                        <a href="services.html#warehousing">Warehousing</a>
+                    </div>
+                </li>
+                <li><a href="tracking.html" class="active">Track Shipment</a></li>
+                <li><a href="calculator.html">Shipping Calculator</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="quote.html" class="btn-header">Book a Shipment</a></li>
+            </ul>
+            <div class="mobile-toggle" id="mobileToggle">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1>Shipment Tracking Portal</h1>
+        <div class="breadcrumbs">
+            <a href="index.html">Home</a>
+            <span>/</span>
+            <span>Track Shipment</span>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        
+        <!-- Search Card -->
+        <div class="search-card">
+            <h2 class="search-title">Enter Tracking Code</h2>
+            <p class="search-desc">Track real-time location updates, departure events, and arrival schedules.</p>
+
+            <form id="trackingForm" onsubmit="executeTrackingSearch(event)">
+                <div class="search-form-group">
+                    <input type="text" id="trackingInput" placeholder="e.g. GEO123456789" required autocomplete="off">
+                    <button type="submit"><i class="fa-solid fa-magnifying-glass"></i> Track Shipment</button>
+                </div>
+            </form>
+
+            <div class="sample-pills-row">
+                <span>Quick Test Codes:</span>
+                <span class="sample-pill" onclick="setAndSearch('GEO123456789')">GEO123456789 (In Transit)</span>
+                <span class="sample-pill" onclick="setAndSearch('GEO987654321')">GEO987654321 (Out for Delivery)</span>
+                <span class="sample-pill" onclick="setAndSearch('GEO456789123')">GEO456789123 (Delivered)</span>
+                <span class="sample-pill" onclick="setAndSearch('GEO000000000')">GEO000000000 (Exception)</span>
+            </div>
+        </div>
+
+        <!-- Loader -->
+        <div class="loader-box" id="loader">
+            <div class="spinner"></div>
+            <p style="color: var(--muted-gray); font-weight: 600;">Searching global freight logistics database...</p>
+        </div>
+
+        <!-- Valid Result Panel -->
+        <div class="result-panel" id="resultPanel">
+            
+            <!-- Summary Header Card -->
+            <div class="status-header-card">
+                <div class="status-top-row">
+                    <div>
+                        <span style="font-size: 0.8rem; color: var(--muted-gray); font-weight:700; text-transform:uppercase;">Shipment Reference</span>
+                        <h2 id="dispTrackingNum" style="font-size: 1.8rem; color: var(--primary-navy); font-weight: 800;">GEO123456789</h2>
+                    </div>
+                    <span class="status-badge-lg" id="dispStatusBadge">In Transit</span>
+                </div>
+
+                <div class="details-grid">
+                    <div class="detail-item">
+                        <span>Origin</span>
+                        <strong id="dispOrigin">London, UK</strong>
+                    </div>
+                    <div class="detail-item">
+                        <span>Destination</span>
+                        <strong id="dispDestination">New York, USA</strong>
+                    </div>
+                    <div class="detail-item">
+                        <span>Estimated Arrival</span>
+                        <strong id="dispEta">Oct 20, 2026</strong>
+                    </div>
+                    <div class="detail-item">
+                        <span>Service Tier</span>
+                        <strong id="dispServiceType">Air Express Cargo</strong>
+                    </div>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="progress-bar-container">
+                    <div class="progress-track">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="progress-steps">
+                        <div class="step-point completed" title="Booked"><i class="fa-solid fa-check"></i></div>
+                        <div class="step-point completed" title="Collected"><i class="fa-solid fa-box"></i></div>
+                        <div class="step-point active" id="stepTransit" title="In Transit"><i class="fa-solid fa-plane"></i></div>
+                        <div class="step-point" id="stepDelivered" title="Delivered"><i class="fa-solid fa-house"></i></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detailed Event Timeline -->
+            <div class="timeline-card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+                    <h3>Shipment Travel History</h3>
+                    <button onclick="window.print()" style="background: var(--light-bg); border: 1px solid var(--border-color); padding: 8px 16px; border-radius: var(--radius-sm); font-weight: 600; cursor: pointer;"><i class="fa-solid fa-print"></i> Print Details</button>
+                </div>
+                <div class="timeline-list" id="timelineContainer">
+                    <!-- Events rendered dynamically by JS -->
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 30px;">
+                <button onclick="resetSearch()" style="background: transparent; border: 2px solid var(--royal-blue); color: var(--royal-blue); padding: 12px 28px; border-radius: var(--radius-sm); font-weight: 700; cursor: pointer;"><i class="fa-solid fa-rotate-left"></i> Track Another Package</button>
+            </div>
+        </div>
+
+        <!-- Error Panel -->
+        <div class="error-panel" id="errorPanel">
+            <div class="error-icon"><i class="fa-solid fa-magnifying-glass-minus"></i></div>
+            <h3 style="font-size: 1.4rem; color: var(--primary-navy); margin-bottom: 8px;">Shipment Reference Not Found</h3>
+            <p style="color: var(--muted-gray); max-width: 500px; margin: 0 auto 20px;">We couldn't locate a shipment record matching the reference code provided. Please double-check your tracking number and try again.</p>
+            <button onclick="resetSearch()" style="background: var(--royal-blue); color: white; border: none; padding: 12px 24px; border-radius: var(--radius-sm); font-weight: 700; cursor: pointer;">Try Searching Again</button>
+        </div>
+
+        <!-- Demo Disclaimer -->
+        <div class="demo-disclaimer">
+            <i class="fa-solid fa-circle-info" style="font-size: 1.2rem; color: var(--royal-blue);"></i>
+            <div>
+                <strong>Frontend Demonstration Notice:</strong> Tracking status, location events, and timestamps shown are illustrative simulated data for frontend interactive preview purposes.
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <a href="index.html" class="logo" style="color: white; margin-bottom: 18px;">
+                    <div class="logo-icon"><i class="fa-solid fa-plane-departure"></i></div>
+                    <span>Geoshippings</span>
+                </a>
+                <p style="margin-top: 15px;">Moving Your World, One Delivery at a Time. Express parcel courier, international freight, and real-time tracking.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Navigation</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="tracking.html">Track Shipment</a></li>
+                    <li><a href="calculator.html">Rate Calculator</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Support</h4>
+                <ul class="footer-links">
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="quote.html">Book Shipment</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Info</h4>
+                <p><i class="fa-solid fa-location-dot" style="margin-right: 8px;"></i> Global Logistics Hub</p>
+                <p style="margin-top: 10px;"><i class="fa-solid fa-envelope" style="margin-right: 8px;"></i> support@geoshippings-demo.com</p>
+                <p style="margin-top: 10px;"><i class="fa-solid fa-phone" style="margin-right: 8px;"></i> +1 (800) 555-GEO-SHIP</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div>&copy; 2026 Geoshippings Logistics. All rights reserved.</div>
+            <div style="display: flex; gap: 15px;">
+                <a href="#" style="color: white;"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#" style="color: white;"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#" style="color: white;"><i class="fa-brands fa-linkedin"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Tracking Engine JavaScript -->
+    <script>
+        // Sample Shipment Master Database
+        const trackingDatabase = {
+            'GEO123456789': {
+                status: 'In Transit',
+                badgeClass: 'badge-in-transit',
+                origin: 'London, UK (LHR)',
+                destination: 'New York, USA (JFK)',
+                eta: 'Oct 20, 2026',
+                service: 'Air Express Cargo',
+                progressWidth: '65%',
+                timeline: [
+                    { time: 'Oct 16, 2026 — 09:30 AM', title: 'Departed Export Sorting Facility', loc: 'London Heathrow Terminal 4', state: 'active' },
+                    { time: 'Oct 15, 2026 — 04:15 PM', title: 'Customs Export Clearance Approved', loc: 'London Gateway Hub', state: 'completed' },
+                    { time: 'Oct 14, 2026 — 11:00 AM', title: 'Package Collected from Sender', loc: 'Central London Station', state: 'completed' },
+                    { time: 'Oct 14, 2026 — 08:00 AM', title: 'Shipment Order Created', loc: 'Online Portal', state: 'completed' }
+                ]
+            },
+            'GEO987654321': {
+                status: 'Out for Delivery',
+                badgeClass: 'badge-in-transit',
+                origin: 'Frankfurt, DE (FRA)',
+                destination: 'Toronto, CA (YYZ)',
+                eta: 'Today by 6:00 PM',
+                service: 'Priority Direct',
+                progressWidth: '88%',
+                timeline: [
+                    { time: 'Oct 16, 2026 — 07:15 AM', title: 'Out for Local Doorstep Delivery', loc: 'Toronto Regional Dispatch Center', state: 'active' },
+                    { time: 'Oct 15, 2026 — 10:40 PM', title: 'Arrived at Destination Facility', loc: 'Toronto Pearson Cargo Terminal', state: 'completed' },
+                    { time: 'Oct 14, 2026 — 02:00 PM', title: 'In Flight Transatlantic Transit', loc: 'En Route', state: 'completed' }
+                ]
+            },
+            'GEO456789123': {
+                status: 'Delivered',
+                badgeClass: 'badge-delivered',
+                origin: 'Tokyo, JP (NRT)',
+                destination: 'Sydney, AU (SYD)',
+                eta: 'Delivered Oct 14, 2026',
+                service: 'Express Courier',
+                progressWidth: '100%',
+                timeline: [
+                    { time: 'Oct 14, 2026 — 02:45 PM', title: 'Successfully Delivered — Signed by J. Smith', loc: 'Sydney Commercial District', state: 'completed' },
+                    { time: 'Oct 14, 2026 — 08:30 AM', title: 'Out for Delivery with Courier', loc: 'Sydney South Depot', state: 'completed' },
+                    { time: 'Oct 13, 2026 — 06:00 PM', title: 'Cleared Customs Inspection', loc: 'Sydney Airport Customs Hub', state: 'completed' }
+                ]
+            },
+            'GEO111222333': {
+                status: 'Shipment Processing',
+                badgeClass: 'badge-processing',
+                origin: 'Dubai, UAE (DXB)',
+                destination: 'Paris, FR (CDG)',
+                eta: 'Oct 24, 2026',
+                service: 'Standard Economy Freight',
+                progressWidth: '25%',
+                timeline: [
+                    { time: 'Oct 16, 2026 — 10:00 AM', title: 'Shipment Information Received & Documented', loc: 'Dubai Central Hub', state: 'active' }
+                ]
+            },
+            'GEO000000000': {
+                status: 'Customs Delay (Exception)',
+                badgeClass: 'badge-exception',
+                origin: 'Singapore (SIN)',
+                destination: 'Berlin, DE (BER)',
+                eta: 'Pending Documentation Review',
+                service: 'International Air Cargo',
+                progressWidth: '45%',
+                timeline: [
+                    { time: 'Oct 16, 2026 — 11:20 AM', title: 'Held by Customs — Missing Commercial Invoice Details', loc: 'Frankfurt Hub Inspection Line', state: 'active' },
+                    { time: 'Oct 15, 2026 — 03:00 PM', title: 'Departed Origin Sorting Terminal', loc: 'Changi Logistics Hub', state: 'completed' }
+                ]
+            }
+        };
+
+        // Quick set & execute search
+        function setAndSearch(code) {
+            document.getElementById('trackingInput').value = code;
+            executeTrackingSearch();
+        }
+
+        // Execute Tracking
+        function executeTrackingSearch(e) {
+            if (e) e.preventDefault();
+            
+            const code = document.getElementById('trackingInput').value.trim().toUpperCase();
+            if (!code) return;
+
+            const loader = document.getElementById('loader');
+            const resultPanel = document.getElementById('resultPanel');
+            const errorPanel = document.getElementById('errorPanel');
+
+            // Reset view
+            resultPanel.style.display = 'none';
+            errorPanel.style.display = 'none';
+            loader.style.display = 'block';
+
+            setTimeout(() => {
+                loader.style.display = 'none';
+
+                if (trackingDatabase[code]) {
+                    const data = trackingDatabase[code];
+
+                    // Populate Data
+                    document.getElementById('dispTrackingNum').innerText = code;
+                    document.getElementById('dispOrigin').innerText = data.origin;
+                    document.getElementById('dispDestination').innerText = data.destination;
+                    document.getElementById('dispEta').innerText = data.eta;
+                    document.getElementById('dispServiceType').innerText = data.service;
+                    
+                    const badge = document.getElementById('dispStatusBadge');
+                    badge.innerText = data.status;
+                    badge.className = `status-badge-lg ${data.badgeClass}`;
+
+                    document.getElementById('progressFill').style.width = data.progressWidth;
+
+                    // Render Timeline
+                    const timelineContainer = document.getElementById('timelineContainer');
+                    timelineContainer.innerHTML = '';
+
+                    data.timeline.forEach(item => {
+                        const div = document.createElement('div');
+                        div.className = `timeline-event ${item.state}`;
+                        div.innerHTML = `
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-time">${item.time}</div>
+                            <div class="timeline-title">${item.title}</div>
+                            <div class="timeline-location"><i class="fa-solid fa-location-dot" style="font-size:0.75rem;"></i> ${item.loc}</div>
+                        `;
+                        timelineContainer.appendChild(div);
+                    });
+
+                    resultPanel.style.display = 'block';
+                } else {
+                    errorPanel.style.display = 'block';
+                }
+            }, 600);
+        }
+
+        // Reset
+        function resetSearch() {
+            document.getElementById('trackingInput').value = '';
+            document.getElementById('resultPanel').style.display = 'none';
+            document.getElementById('errorPanel').style.display = 'none';
+            document.getElementById('trackingInput').focus();
+        }
+
+        // Parse query parameter if present on load (e.g. tracking.html?code=GEO123456789)
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const codeParam = urlParams.get('code');
+            if (codeParam) {
+                document.getElementById('trackingInput').value = codeParam;
+                executeTrackingSearch();
+            }
+        });
+
+        // Mobile Toggle
+        const mobileToggle = document.getElementById('mobileToggle');
+        const navLinks = document.getElementById('navLinks');
+        if (mobileToggle) {
+            mobileToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+        }
+    </script>
+</body>
+</html>

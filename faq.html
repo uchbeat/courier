@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frequently Asked Questions — Geoshippings Logistics</title>
+    <meta name="description" content="Find answers to common questions about Geoshippings Logistics shipment tracking, delivery times, customs guidelines, rates, and courier services.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-navy: #102A43;
+            --royal-blue: #1769FF;
+            --bright-cyan: #27C2E5;
+            --light-bg: #F5F8FC;
+            --dark-text: #182230;
+            --muted-gray: #667085;
+            --white: #FFFFFF;
+            --success-green: #16A34A;
+            --border-color: #E2E8F0;
+            --card-shadow: 0 10px 30px rgba(16, 42, 67, 0.06);
+            --hover-shadow: 0 18px 40px rgba(23, 105, 255, 0.12);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 18px;
+            --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--dark-text);
+            background-color: #FFFFFF;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* Top Bar */
+        .top-bar {
+            background: var(--primary-navy);
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 0.85rem;
+            padding: 8px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .top-bar-info { display: flex; gap: 20px; }
+        .top-bar-info span { display: flex; align-items: center; gap: 6px; }
+
+        /* Navigation Header */
+        header {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(16, 42, 67, 0.05);
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 5%;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 800;
+            font-size: 1.35rem;
+            color: var(--primary-navy);
+        }
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, var(--royal-blue), var(--bright-cyan));
+            color: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+        .nav-links { display: flex; gap: 28px; align-items: center; }
+        .nav-links a {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--dark-text);
+            transition: var(--transition);
+        }
+        .nav-links a:hover, .nav-links a.active { color: var(--royal-blue); }
+        .dropdown { position: relative; }
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 230px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+            border-radius: var(--radius-sm);
+            padding: 10px 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+        }
+        .dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+        .dropdown-menu a { padding: 10px 20px; display: block; font-weight: 500; font-size: 0.9rem; }
+        .dropdown-menu a:hover { background: var(--light-bg); color: var(--royal-blue); }
+        .btn-header {
+            background: var(--royal-blue);
+            color: white !important;
+            padding: 10px 22px;
+            border-radius: var(--radius-sm);
+            box-shadow: 0 4px 14px rgba(23, 105, 255, 0.3);
+            font-weight: 700 !important;
+        }
+        .btn-header:hover { background: #0052e0 !important; transform: translateY(-2px); }
+        .mobile-toggle { display: none; font-size: 1.5rem; cursor: pointer; color: var(--primary-navy); }
+
+        /* Page Banner Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-navy) 0%, #1a365d 100%);
+            color: white;
+            padding: 60px 5% 70px;
+            text-align: center;
+        }
+        .page-header h1 { font-size: 2.8rem; font-weight: 800; margin: 0 0 10px; }
+        .breadcrumbs { display: flex; justify-content: center; gap: 10px; font-size: 0.9rem; color: rgba(255,255,255,0.7); }
+        .breadcrumbs a { color: var(--bright-cyan); }
+
+        /* Main Container */
+        .container { max-width: 1000px; margin: 0 auto; padding: 60px 5%; }
+
+        /* FAQ Search Box */
+        .faq-search-box {
+            background: white;
+            padding: 30px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--card-shadow);
+            border: 1px solid var(--border-color);
+            margin-top: -80px;
+            position: relative;
+            z-index: 10;
+            margin-bottom: 40px;
+        }
+        .search-input-wrapper {
+            display: flex;
+            align-items: center;
+            background: var(--light-bg);
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            padding: 0 16px;
+            transition: var(--transition);
+        }
+        .search-input-wrapper:focus-within { border-color: var(--royal-blue); background: white; }
+        .search-input-wrapper i { color: var(--muted-gray); font-size: 1.1rem; margin-right: 12px; }
+        .search-input-wrapper input {
+            border: none;
+            background: transparent;
+            padding: 16px 0;
+            font-size: 1rem;
+            width: 100%;
+            outline: none;
+            font-family: inherit;
+        }
+
+        /* Filter Category Tabs */
+        .faq-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        .tab-btn {
+            background: var(--light-bg);
+            border: 1px solid var(--border-color);
+            padding: 10px 22px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--dark-text);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .tab-btn:hover, .tab-btn.active {
+            background: var(--royal-blue);
+            color: white;
+            border-color: var(--royal-blue);
+            box-shadow: 0 4px 14px rgba(23, 105, 255, 0.25);
+        }
+
+        /* Accordion List */
+        .accordion-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .accordion-item {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+        }
+        .accordion-item:hover { border-color: rgba(23, 105, 255, 0.3); }
+        .accordion-header {
+            padding: 22px 28px;
+            background: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            transition: var(--transition);
+        }
+        .accordion-header h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--primary-navy);
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .accordion-header h3 i { color: var(--royal-blue); font-size: 0.95rem; }
+        .accordion-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--light-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-navy);
+            font-size: 0.85rem;
+            transition: var(--transition);
+            flex-shrink: 0;
+        }
+        .accordion-item.open .accordion-icon {
+            transform: rotate(180deg);
+            background: var(--royal-blue);
+            color: white;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s cubic-bezier(0, 1, 0, 1);
+            background: var(--light-bg);
+            border-top: 0 solid var(--border-color);
+        }
+        .accordion-item.open .accordion-content {
+            max-height: 500px;
+            transition: max-height 0.35s ease-in-out;
+            border-top-width: 1px;
+        }
+        .accordion-body {
+            padding: 24px 28px;
+            color: var(--dark-text);
+            font-size: 0.95rem;
+            line-height: 1.65;
+        }
+
+        /* Empty Search Message */
+        .no-results {
+            display: none;
+            text-align: center;
+            padding: 50px 20px;
+            color: var(--muted-gray);
+        }
+        .no-results i { font-size: 2.5rem; margin-bottom: 15px; color: var(--border-color); }
+
+        /* CTA Box */
+        .support-cta {
+            background: linear-gradient(135deg, var(--royal-blue) 0%, #0d4bc3 100%);
+            color: white;
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            text-align: center;
+            margin-top: 60px;
+            box-shadow: 0 15px 35px rgba(23, 105, 255, 0.25);
+        }
+        .support-cta h3 { font-size: 1.6rem; font-weight: 800; margin-bottom: 10px; }
+        .support-cta p { max-width: 500px; margin: 0 auto 25px; opacity: 0.9; font-size: 0.95rem; }
+        .btn-support-cta {
+            background: white;
+            color: var(--royal-blue);
+            padding: 12px 28px;
+            border-radius: var(--radius-sm);
+            font-weight: 700;
+            display: inline-block;
+            transition: var(--transition);
+        }
+        .btn-support-cta:hover { background: var(--light-bg); transform: translateY(-2px); }
+
+        /* Disclaimer */
+        .demo-disclaimer {
+            background: var(--light-bg);
+            border-left: 4px solid var(--royal-blue);
+            padding: 16px 20px;
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            margin-top: 40px;
+            font-size: 0.82rem;
+            color: var(--muted-gray);
+        }
+
+        /* Footer */
+        footer {
+            background: #0B1D2D;
+            color: rgba(255, 255, 255, 0.75);
+            padding: 80px 5% 30px;
+            font-size: 0.92rem;
+            margin-top: 80px;
+        }
+        .footer-grid {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 50px;
+            margin-bottom: 60px;
+        }
+        .footer-col h4 { color: white; font-size: 1.1rem; font-weight: 700; margin-bottom: 22px; }
+        .footer-links { display: flex; flex-direction: column; gap: 12px; }
+        .footer-links a:hover { color: var(--bright-cyan); padding-left: 5px; }
+        .footer-bottom {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: white;
+                flex-direction: column;
+                padding: 40px;
+                transition: 0.4s ease;
+                align-items: flex-start;
+            }
+            .nav-links.active { left: 0; }
+            .mobile-toggle { display: block; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .accordion-header { padding: 18px 20px; }
+            .accordion-body { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Announcement Bar -->
+    <div class="top-bar">
+        <span><i class="fa-solid fa-shield-halved"></i> Reliable Deliveries. Worldwide Connections.</span>
+        <div class="top-bar-info">
+            <span><i class="fa-solid fa-circle-question"></i> Help & Knowledge Center</span>
+            <span><i class="fa-solid fa-globe"></i> Global Coverage</span>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                <div class="logo-icon"><i class="fa-solid fa-plane-departure"></i></div>
+                <span>Geoshippings</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li class="dropdown">
+                    <a href="services.html">Services <i class="fa-solid fa-chevron-down" style="font-size:0.75rem;"></i></a>
+                    <div class="dropdown-menu">
+                        <a href="services.html#express">Express Courier</a>
+                        <a href="services.html#air">Air Cargo</a>
+                        <a href="services.html#ocean">Ocean Freight</a>
+                        <a href="services.html#warehousing">Warehousing</a>
+                    </div>
+                </li>
+                <li><a href="tracking.html">Track Shipment</a></li>
+                <li><a href="calculator.html">Shipping Calculator</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="quote.html" class="btn-header">Book a Shipment</a></li>
+            </ul>
+            <div class="mobile-toggle" id="mobileToggle">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1>Help Center & FAQ</h1>
+        <div class="breadcrumbs">
+            <a href="index.html">Home</a>
+            <span>/</span>
+            <span>FAQ</span>
+        </div>
+    </section>
+
+    <!-- Main Container -->
+    <main class="container">
+        
+        <!-- Live Search Input Box -->
+        <div class="faq-search-box">
+            <div class="search-input-wrapper">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="faqSearchInput" placeholder="Search questions (e.g. tracking, rates, customs, delays)..." onkeyup="filterFAQ()">
+            </div>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="faq-tabs">
+            <button class="tab-btn active" onclick="filterCategory('all', this)">All Questions</button>
+            <button class="tab-btn" onclick="filterCategory('tracking', this)">Tracking & Status</button>
+            <button class="tab-btn" onclick="filterCategory('rates', this)">Shipping & Rates</button>
+            <button class="tab-btn" onclick="filterCategory('restricted', this)">Customs & Restricted</button>
+            <button class="tab-btn" onclick="filterCategory('support', this)">Claims & Support</button>
+        </div>
+
+        <!-- Accordion Items Container -->
+        <div class="accordion-list" id="accordionList">
+            
+            <!-- FAQ Item 1 -->
+            <div class="accordion-item" data-category="tracking">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <h3><i class="fa-solid fa-magnifying-glass-location"></i> How do I track my shipment?</h3>
+                    <div class="accordion-icon"><i class="fa-solid fa-chevron-down"></i></div>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        You can track your package in real-time by entering your unique tracking code (such as <strong>GEO123456789</strong>) on our <a href="tracking.html" style="color: var(--royal-blue); font-weight:700;">Track Shipment page</a> or directly in the search bar on our homepage hero section.
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Item 2 -->
+            <div class="accordion-item" data-category="rates">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <h3><i class="fa-solid fa-calculator"></i> How are shipping costs calculated?</h3>
+                    <div class="accordion-icon"><i class="fa-solid fa-chevron-down"></i></div>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        Freight charges are calculated based on chargeable weight, which is the greater of actual weight or dimensional (volumetric) weight <code>(L × W × H / 5000)</code>, along with destination distance, insurance options, and speed tier (Economy, Express, or Priority). Use our <a href="calculator.html" style="color: var(--royal-blue); font-weight:700;">Shipping Calculator</a> for an immediate estimate.
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Item 3 -->
+            <div class="accordion-item" data-category="tracking">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <h3><i class="fa-solid fa-clock"></i> What should I do if my tracking status says "Customs Delay"?</h3>
+                    <div class="accordion-icon"><i class="fa-solid fa-chevron-down"></i></div>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        Customs holds usually occur when destination authorities require additional commercial invoices, tax declarations, or package inspection. If your package experiences a delay, our support team will notify the sender or recipient via email to resolve necessary documentation requirements.
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Item 4 -->
+            <div class="accordion-item" data-category="restricted">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <h3><i class="fa-solid fa-ban"></i> Which items are restricted or hazardous for air transport?</h3>
+                    <div class="accordion-icon"><i class="fa-solid fa-chevron-down"></i></div>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        Restricted items include lithium-ion batteries exceeding regulation thresholds, flammable liquids, pressurized gases, explosives, weapons, perishable food products without specialized cold-chain clearance, and currency. Please review your destination country's regulations before booking.
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Item 5 -->
+            <div class="accordion-item" data-category="rates">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <h3><i class="fa-solid fa-truck-fast"></i> What is the difference between Express and Standard freight?</h3>
+                    <div class="accordion-icon"><i class="fa-solid fa-chevron-down"></i></div>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        Priority Air Express provides time-critical flight routing with 1–2 business day arrival windows and direct airport clearance. Standard Freight utilizes consolidated air or ocean routes, offering cost-effective transit typically arriving within 3–8 business days.
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Item 6 -->
+            <div class="accordion-item" data-category="support">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <h3><i class="fa-solid fa-box-open"></i> What should I do if my package arrives damaged?</h3>
+                    <div class="accordion-icon"><i class="fa-solid fa-chevron-down"></i></div>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        If a parcel arrives damaged, please retain all original packaging and photos of the condition. File a formal damage claim through our <a href="contact.html" style="color: var(--royal-blue); font-weight:700;">Contact Page</a> within 48 hours of delivery signature to initiate inspection and insurance reimbursement workflows.
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Item 7 -->
+            <div class="accordion-item" data-category="support">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <h3><i class="fa-solid fa-pen-to-square"></i> Can I change the delivery address after dispatch?</h3>
+                    <div class="accordion-icon"><i class="fa-solid fa-chevron-down"></i></div>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        Address modifications are possible while the package is at an intermediate sorting terminal before dispatching for final doorstep delivery. Address change requests may incur a rerouting fee depending on destination carrier policies.
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Item 8 -->
+            <div class="accordion-item" data-category="rates">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <h3><i class="fa-solid fa-calendar-check"></i> How do I schedule a pickup at my office or home?</h3>
+                    <div class="accordion-icon"><i class="fa-solid fa-chevron-down"></i></div>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        You can schedule a pickup online using our <a href="quote.html" style="color: var(--royal-blue); font-weight:700;">Book a Shipment Wizard</a>. Select your pickup address, weight details, and preferred pickup date to request a courier dispatch.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- No Results Fallback -->
+        <div class="no-results" id="noResults">
+            <i class="fa-solid fa-file-circle-question"></i>
+            <h3 style="font-size: 1.2rem; color: var(--primary-navy); margin-bottom: 6px;">No Matching Questions Found</h3>
+            <p style="font-size: 0.9rem;">Try searching for terms like "tracking", "rates", or "delivery".</p>
+        </div>
+
+        <!-- Support CTA Banner -->
+        <div class="support-cta">
+            <h3>Still Have Questions?</h3>
+            <p>Our global support team is available to assist you with package routing, corporate contracts, and customs documentation.</p>
+            <a href="contact.html" class="btn-support-cta"><i class="fa-solid fa-headset"></i> Contact Support Team</a>
+        </div>
+
+        <!-- Disclaimer -->
+        <div class="demo-disclaimer">
+            <i class="fa-solid fa-circle-info" style="color: var(--royal-blue); margin-right: 6px;"></i>
+            <strong>Frontend Demonstration Notice:</strong> Informational answers, transit guidelines, and insurance policies listed above represent sample demonstration content.
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <a href="index.html" class="logo" style="color: white; margin-bottom: 18px;">
+                    <div class="logo-icon"><i class="fa-solid fa-plane-departure"></i></div>
+                    <span>Geoshippings</span>
+                </a>
+                <p style="margin-top: 15px;">Moving Your World, One Delivery at a Time. Express parcel courier, international cargo freight, and knowledge base support.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Navigation</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="tracking.html">Track Shipment</a></li>
+                    <li><a href="calculator.html">Rate Calculator</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Support</h4>
+                <ul class="footer-links">
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="quote.html">Book Delivery</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Info</h4>
+                <p><i class="fa-solid fa-location-dot" style="margin-right: 8px;"></i> Global Logistics Hub</p>
+                <p style="margin-top: 10px;"><i class="fa-solid fa-envelope" style="margin-right: 8px;"></i> support@geoshippings-demo.com</p>
+                <p style="margin-top: 10px;"><i class="fa-solid fa-phone" style="margin-right: 8px;"></i> +1 (800) 555-GEO-SHIP</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div>&copy; 2026 Geoshippings Logistics. All rights reserved.</div>
+            <div style="display: flex; gap: 15px;">
+                <a href="#" style="color: white;"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#" style="color: white;"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#" style="color: white;"><i class="fa-brands fa-linkedin"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive FAQ Accordion & Search Logic -->
+    <script>
+        // Toggle Accordion Item
+        function toggleAccordion(header) {
+            const item = header.parentElement;
+            const isOpen = item.classList.contains('open');
+
+            // Close all open accordions
+            document.querySelectorAll('.accordion-item').forEach(acc => {
+                acc.classList.remove('open');
+            });
+
+            // Toggle selected item
+            if (!isOpen) {
+                item.classList.add('open');
+            }
+        }
+
+        // Category Filter
+        function filterCategory(category, btn) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            if (btn) btn.classList.add('active');
+
+            const items = document.querySelectorAll('.accordion-item');
+            let visibleCount = 0;
+
+            items.forEach(item => {
+                const itemCat = item.getAttribute('data-category');
+                if (category === 'all' || itemCat === category) {
+                    item.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            document.getElementById('noResults').style.display = visibleCount === 0 ? 'block' : 'none';
+        }
+
+        // Live Search Filter
+        function filterFAQ() {
+            const query = document.getElementById('faqSearchInput').value.toLowerCase().trim();
+            const items = document.querySelectorAll('.accordion-item');
+            let visibleCount = 0;
+
+            items.forEach(item => {
+                const text = item.innerText.toLowerCase();
+                if (text.includes(query)) {
+                    item.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            document.getElementById('noResults').style.display = visibleCount === 0 ? 'block' : 'none';
+        }
+
+        // Mobile Nav Toggle
+        const mobileToggle = document.getElementById('mobileToggle');
+        const navLinks = document.getElementById('navLinks');
+        if (mobileToggle) {
+            mobileToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+        }
+    </script>
+</body>
+</html>

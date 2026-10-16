@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us — Geoshippings Logistics</title>
+    <meta name="description" content="Learn about Geoshippings Logistics, our mission, core values, global logistics network, and commitment to seamless courier delivery.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- External Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/animations.css">
+    
+    <style>
+        /* Standalone Inline Styling Fallbacks & Specific About Page Enhancements */
+        :root {
+            --primary-navy: #102A43;
+            --royal-blue: #1769FF;
+            --bright-cyan: #27C2E5;
+            --light-bg: #F5F8FC;
+            --dark-text: #182230;
+            --muted-gray: #667085;
+            --white: #FFFFFF;
+            --border-color: #E2E8F0;
+            --card-shadow: 0 10px 30px rgba(16, 42, 67, 0.05);
+            --radius: 12px;
+            --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--dark-text);
+            background-color: #FFFFFF;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* Top Announcement Bar */
+        .top-bar {
+            background: var(--primary-navy);
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 0.85rem;
+            padding: 8px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .top-bar-info { display: flex; gap: 20px; }
+        .top-bar-info span { display: flex; align-items: center; gap: 6px; }
+
+        /* Navigation Header */
+        header {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 5%;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            font-size: 1.35rem;
+            color: var(--primary-navy);
+            text-decoration: none;
+        }
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--royal-blue), var(--bright-cyan));
+            color: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 28px;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-text);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--royal-blue);
+        }
+        .dropdown { position: relative; }
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 220px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            padding: 10px 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: var(--transition);
+        }
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .dropdown-menu a {
+            padding: 10px 20px;
+            display: block;
+            font-weight: 500;
+        }
+        .dropdown-menu a:hover {
+            background: var(--light-bg);
+        }
+        .btn-header {
+            background: var(--royal-blue);
+            color: white !important;
+            padding: 10px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 14px rgba(23, 105, 255, 0.3);
+        }
+        .btn-header:hover {
+            background: #0052e0 !important;
+            transform: translateY(-2px);
+        }
+        .mobile-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-navy);
+        }
+
+        /* Page Banner Header & Breadcrumbs */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-navy) 0%, #1a365d 100%);
+            color: white;
+            padding: 60px 5% 70px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(39, 194, 229, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .page-header h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin: 0 0 10px;
+        }
+        .breadcrumbs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.7);
+        }
+        .breadcrumbs a { color: var(--bright-cyan); text-decoration: none; }
+
+        /* Container Standard */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 5%;
+        }
+
+        /* About Overview Grid */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .about-image-stack {
+            position: relative;
+        }
+        .about-image-main {
+            width: 100%;
+            border-radius: var(--radius);
+            box-shadow: var(--card-shadow);
+            object-fit: cover;
+            height: 420px;
+        }
+        .about-experience-badge {
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            background: linear-gradient(135deg, var(--royal-blue), var(--bright-cyan));
+            color: white;
+            padding: 24px;
+            border-radius: var(--radius);
+            box-shadow: 0 10px 25px rgba(23, 105, 255, 0.3);
+            text-align: center;
+            min-width: 140px;
+        }
+        .about-experience-badge .num {
+            font-size: 2.2rem;
+            font-weight: 800;
+            display: block;
+            line-height: 1;
+        }
+        .about-experience-badge .text {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.9;
+        }
+
+        .section-tag {
+            color: var(--royal-blue);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1.5px;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+        .section-title {
+            font-size: 2.2rem;
+            color: var(--primary-navy);
+            font-weight: 800;
+            line-height: 1.25;
+            margin: 0 0 20px;
+        }
+        .lead-p {
+            font-size: 1.1rem;
+            color: var(--dark-text);
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+        .muted-p {
+            color: var(--muted-gray);
+            margin-bottom: 25px;
+        }
+
+        /* Mission Vision Cards */
+        .mv-section {
+            background: var(--light-bg);
+            padding: 80px 5%;
+        }
+        .mv-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .mv-card {
+            background: white;
+            padding: 40px;
+            border-radius: var(--radius);
+            box-shadow: var(--card-shadow);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+        .mv-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--royal-blue);
+        }
+        .mv-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(23, 105, 255, 0.1);
+            color: var(--royal-blue);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 24px;
+        }
+
+        /* Values Grid */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .value-card {
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 30px;
+            transition: var(--transition);
+        }
+        .value-card:hover {
+            box-shadow: var(--card-shadow);
+            border-color: var(--bright-cyan);
+        }
+        .value-icon {
+            font-size: 2rem;
+            color: var(--bright-cyan);
+            margin-bottom: 15px;
+        }
+
+        /* Stats Strip */
+        .stats-section {
+            background: var(--primary-navy);
+            color: white;
+            padding: 60px 5%;
+        }
+        .stats-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+        .stat-item h3 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--bright-cyan);
+            margin: 0 0 5px;
+        }
+        .stat-item p {
+            color: rgba(255, 255, 255, 0.7);
+            margin: 0;
+            font-size: 0.95rem;
+        }
+        .disclaimer-note {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.4);
+            text-align: center;
+            margin-top: 30px;
+            display: block;
+        }
+
+        /* Call To Action Banner */
+        .cta-banner {
+            background: linear-gradient(135deg, var(--royal-blue) 0%, #0d4bc3 100%);
+            color: white;
+            border-radius: var(--radius);
+            padding: 50px;
+            text-align: center;
+            margin: 60px auto 80px;
+            max-width: 1100px;
+        }
+        .cta-banner h2 { font-size: 2rem; font-weight: 800; margin-bottom: 15px; }
+        .cta-banner p { max-width: 600px; margin: 0 auto 30px; opacity: 0.9; }
+        .btn-cta {
+            background: white;
+            color: var(--royal-blue);
+            font-weight: 700;
+            padding: 14px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-block;
+            transition: var(--transition);
+        }
+        .btn-cta:hover {
+            background: var(--light-bg);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+
+        /* Footer */
+        footer {
+            background: #0B1D2D;
+            color: rgba(255, 255, 255, 0.7);
+            padding: 70px 5% 30px;
+            font-size: 0.9rem;
+        }
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        .footer-col h4 {
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+        .footer-links { list-style: none; padding: 0; margin: 0; }
+        .footer-links li { margin-bottom: 10px; }
+        .footer-links a { color: rgba(255,255,255,0.7); text-decoration: none; transition: var(--transition); }
+        .footer-links a:hover { color: var(--bright-cyan); }
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 992px) {
+            .about-grid { grid-template-columns: 1fr; gap: 40px; }
+            .about-image-stack { max-width: 600px; margin: 0 auto; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: white;
+                flex-direction: column;
+                padding: 40px;
+                transition: 0.4s ease;
+                align-items: flex-start;
+            }
+            .nav-links.active { left: 0; }
+            .mobile-toggle { display: block; }
+            .top-bar-info span:nth-child(2) { display: none; }
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Announcement Bar -->
+    <div class="top-bar">
+        <span><i class="fa-solid fa-shield-halved"></i> Reliable Deliveries. Worldwide Connections.</span>
+        <div class="top-bar-info">
+            <span><i class="fa-solid fa-headset"></i> Support Placeholder</span>
+            <span><i class="fa-solid fa-globe"></i> Global Network</span>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                <div class="logo-icon"><i class="fa-solid fa-plane-departure"></i></div>
+                <span>Geoshippings</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html" class="active">About Us</a></li>
+                <li class="dropdown">
+                    <a href="services.html">Services <i class="fa-solid fa-chevron-down" style="font-size:0.75rem;"></i></a>
+                    <div class="dropdown-menu">
+                        <a href="services.html#express">Express Courier</a>
+                        <a href="services.html#air-freight">Air Cargo</a>
+                        <a href="services.html#ocean-freight">Ocean Shipping</a>
+                        <a href="services.html#warehousing">Warehousing & Fulfillment</a>
+                    </div>
+                </li>
+                <li><a href="tracking.html">Track Shipment</a></li>
+                <li><a href="calculator.html">Shipping Calculator</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="quote.html" class="btn-header">Book a Shipment</a></li>
+            </ul>
+            <div class="mobile-toggle" id="mobileToggle">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Title & Breadcrumbs -->
+    <section class="page-header">
+        <h1>About Geoshippings Logistics</h1>
+        <div class="breadcrumbs">
+            <a href="index.html">Home</a>
+            <span>/</span>
+            <span>About Us</span>
+        </div>
+    </section>
+
+    <!-- Company Overview -->
+    <section class="container">
+        <div class="about-grid">
+            <div>
+                <span class="section-tag">Who We Are</span>
+                <h2 class="section-title">Connecting Global Trade With Speed and Precision</h2>
+                <p class="lead-p">Geoshippings Logistics is structured as a modern courier and global logistics service provider dedicated to seamless freight movement, parcel delivery, and supply chain management.</p>
+                <p class="muted-p">We combine strategic routing networks, advanced parcel status monitoring, and customer-first support to help businesses and individuals transport packages across borders and cities efficiently.</p>
+                <p class="muted-p">Whether managing urgent express documentation or large-scale commercial shipments, our goal remains unchanged: ensuring your cargo arrives safely, transparently, and on schedule.</p>
+            </div>
+            <div class="about-image-stack">
+                <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80" alt="Warehouse and Logistics Operation" class="about-image-main">
+                <div class="about-experience-badge">
+                    <span class="num">Global</span>
+                    <span class="text">Coverage Reach</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission & Vision -->
+    <section class="mv-section">
+        <div class="mv-grid">
+            <div class="mv-card">
+                <div class="mv-icon"><i class="fa-solid fa-bullseye"></i></div>
+                <h3 style="color: var(--primary-navy); margin-top:0;">Our Mission</h3>
+                <p class="muted-p" style="margin-bottom:0;">To provide dependable, safe, and transparent courier and cargo transportation services powered by modern logistics tracking workflows and dedicated client support.</p>
+            </div>
+            <div class="mv-card">
+                <div class="mv-icon"><i class="fa-solid fa-eye"></i></div>
+                <h3 style="color: var(--primary-navy); margin-top:0;">Our Vision</h3>
+                <p class="muted-p" style="margin-bottom:0;">To build an interconnected global transport network that simplifies international trade and personal deliveries for businesses and individuals worldwide.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Values -->
+    <section class="container">
+        <div style="text-align: center; max-width: 700px; margin: 0 auto 50px;">
+            <span class="section-tag">Principles That Drive Us</span>
+            <h2 class="section-title">Our Core Values</h2>
+            <p class="muted-p">Our operational methodology is built on transparency, safety, and operational excellence.</p>
+        </div>
+
+        <div class="values-grid">
+            <div class="value-card">
+                <div class="value-icon"><i class="fa-solid fa-shield-cat"></i></div>
+                <h4 style="color: var(--primary-navy); margin: 0 0 10px;">Security & Safety</h4>
+                <p class="muted-p" style="font-size: 0.9rem; margin:0;">Every package is handled with strict care and protocol to prevent damage or loss in transit.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon"><i class="fa-solid fa-stopwatch"></i></div>
+                <h4 style="color: var(--primary-navy); margin: 0 0 10px;">Punctuality</h4>
+                <p class="muted-p" style="font-size: 0.9rem; margin:0;">We prioritize optimized routing and time-sensitive delivery schedules across all channels.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon"><i class="fa-solid fa-magnifying-glass-location"></i></div>
+                <h4 style="color: var(--primary-navy); margin: 0 0 10px;">Transparency</h4>
+                <p class="muted-p" style="font-size: 0.9rem; margin:0;">Clear status tracking and realistic expectations without unexpected hidden delays.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon"><i class="fa-solid fa-users-gears"></i></div>
+                <h4 style="color: var(--primary-navy); margin: 0 0 10px;">Customer First</h4>
+                <p class="muted-p" style="font-size: 0.9rem; margin:0;">Responsive support teams ready to assist with package inquiries and customized logistics.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Illustrative Logistics Capabilities / Stats -->
+    <section class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <h3>99.2%</h3>
+                <p>On-Time Arrival Target</p>
+            </div>
+            <div class="stat-item">
+                <h3>150+</h3>
+                <p>Destination Routes</p>
+            </div>
+            <div class="stat-item">
+                <h3>24/7</h3>
+                <p>Tracking Monitoring</p>
+            </div>
+            <div class="stat-item">
+                <h3>10k+</h3>
+                <p>Packages Handled (Demo)</p>
+            </div>
+        </div>
+        <span class="disclaimer-note">* Note: Metrics presented above represent illustrative performance targets for demonstration purposes.</span>
+    </section>
+
+    <!-- Call to Action -->
+    <div class="container" style="padding-top:0; padding-bottom:0;">
+        <div class="cta-banner">
+            <h2>Ready to Ship Your Package?</h2>
+            <p>Calculate your estimated shipping rates or track an existing delivery in real-time with Geoshippings Logistics.</p>
+            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                <a href="quote.html" class="btn-cta">Book a Shipment</a>
+                <a href="tracking.html" class="btn-cta" style="background: transparent; color: white; border: 2px solid white;">Track Shipment</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <a href="index.html" class="logo" style="color: white; margin-bottom: 15px;">
+                    <div class="logo-icon"><i class="fa-solid fa-plane-departure"></i></div>
+                    <span>Geoshippings</span>
+                </a>
+                <p style="margin-top: 15px;">Moving Your World, One Delivery at a Time. Professional international shipping, express courier, and global logistics options.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="tracking.html">Track Shipment</a></li>
+                    <li><a href="calculator.html">Shipping Calculator</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Support & Legal</h4>
+                <ul class="footer-links">
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="quote.html">Book Shipment</a></li>
+                    <li><a href="#">Privacy Disclaimer</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Placeholder</h4>
+                <p><i class="fa-solid fa-location-dot"></i> Regional Logistics Terminal</p>
+                <p><i class="fa-solid fa-envelope"></i> support@geoshippings-demo.com</p>
+                <p><i class="fa-solid fa-phone"></i> +1 (800) 555-GEO-SHIP</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div>&copy; 2026 Geoshippings Logistics. All rights reserved. (Frontend Interactive Showcase)</div>
+            <div style="display: flex; gap: 15px;">
+                <a href="#" style="color: white;"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#" style="color: white;"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#" style="color: white;"><i class="fa-brands fa-linkedin"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive JS Scripts -->
+    <script class="code-snippet">
+        // Navigation Menu Toggle Logic
+        const mobileToggle = document.getElementById('mobileToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        if (mobileToggle) {
+            mobileToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                const icon = mobileToggle.querySelector('i');
+                if (navLinks.classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-xmark');
+                } else {
+                    icon.classList.remove('fa-xmark');
+                    icon.classList.add('fa-bars');
+                }
+            });
+        }
+    </script>
+</body>
+</html>

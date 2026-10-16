@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services — Geoshippings Logistics</title>
+    <meta name="description" content="Explore Geoshippings Logistics' services: Express courier, international freight, e-commerce fulfillment, warehousing, and same-day parcel shipping solutions.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-navy: #102A43;
+            --royal-blue: #1769FF;
+            --bright-cyan: #27C2E5;
+            --light-bg: #F5F8FC;
+            --dark-text: #182230;
+            --muted-gray: #667085;
+            --white: #FFFFFF;
+            --success-green: #16A34A;
+            --border-color: #E2E8F0;
+            --card-shadow: 0 10px 30px rgba(16, 42, 67, 0.05);
+            --hover-shadow: 0 18px 40px rgba(23, 105, 255, 0.12);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 18px;
+            --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--dark-text);
+            background-color: #FFFFFF;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* Top Bar */
+        .top-bar {
+            background: var(--primary-navy);
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 0.85rem;
+            padding: 8px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .top-bar-info { display: flex; gap: 20px; }
+        .top-bar-info span { display: flex; align-items: center; gap: 6px; }
+
+        /* Header & Navigation */
+        header {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(16, 42, 67, 0.05);
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 5%;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 800;
+            font-size: 1.35rem;
+            color: var(--primary-navy);
+        }
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, var(--royal-blue), var(--bright-cyan));
+            color: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            align-items: center;
+        }
+        .nav-links a {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--dark-text);
+            transition: var(--transition);
+        }
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--royal-blue);
+        }
+        .dropdown { position: relative; }
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 230px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+            border-radius: var(--radius-sm);
+            padding: 10px 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+        }
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .dropdown-menu a {
+            padding: 10px 20px;
+            display: block;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        .dropdown-menu a:hover { background: var(--light-bg); color: var(--royal-blue); }
+        .btn-header {
+            background: var(--royal-blue);
+            color: white !important;
+            padding: 10px 22px;
+            border-radius: var(--radius-sm);
+            box-shadow: 0 4px 14px rgba(23, 105, 255, 0.3);
+            font-weight: 700 !important;
+        }
+        .btn-header:hover { background: #0052e0 !important; transform: translateY(-2px); }
+        .mobile-toggle { display: none; font-size: 1.5rem; cursor: pointer; color: var(--primary-navy); }
+
+        /* Page Banner Header & Breadcrumbs */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-navy) 0%, #1a365d 100%);
+            color: white;
+            padding: 60px 5% 70px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .page-header h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin: 0 0 10px;
+            letter-spacing: -0.5px;
+        }
+        .breadcrumbs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.7);
+        }
+        .breadcrumbs a { color: var(--bright-cyan); }
+
+        /* Layout Container */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 80px 5%;
+        }
+
+        /* Filter Tab Buttons */
+        .filter-wrapper {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            background: var(--light-bg);
+            border: 1px solid var(--border-color);
+            color: var(--dark-text);
+            padding: 10px 22px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--royal-blue);
+            color: white;
+            border-color: var(--royal-blue);
+            box-shadow: 0 4px 14px rgba(23, 105, 255, 0.25);
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 30px;
+        }
+        .service-card {
+            background: white;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--card-shadow);
+            overflow: hidden;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        .service-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--hover-shadow);
+            border-color: rgba(23, 105, 255, 0.3);
+        }
+        .service-img-wrapper {
+            height: 200px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        .service-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .service-card:hover .service-img-wrapper img {
+            transform: scale(1.05);
+        }
+        .service-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(16, 42, 67, 0.85);
+            color: white;
+            backdrop-filter: blur(4px);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .service-body {
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        .service-title {
+            font-size: 1.35rem;
+            color: var(--primary-navy);
+            font-weight: 800;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .service-title i { color: var(--royal-blue); }
+        .service-desc {
+            color: var(--muted-gray);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+        .service-benefits {
+            background: var(--light-bg);
+            padding: 15px;
+            border-radius: var(--radius-sm);
+            margin-bottom: 25px;
+        }
+        .service-benefits h5 {
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            color: var(--primary-navy);
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+        .service-benefits ul { display: flex; flex-direction: column; gap: 6px; }
+        .service-benefits li {
+            font-size: 0.85rem;
+            color: var(--dark-text);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .service-benefits li i { color: var(--success-green); font-size: 0.75rem; }
+
+        .service-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid var(--border-color);
+        }
+        .eta-tag {
+            font-size: 0.8rem;
+            color: var(--muted-gray);
+            font-weight: 600;
+        }
+        .btn-card-cta {
+            background: var(--royal-blue);
+            color: white;
+            padding: 10px 18px;
+            border-radius: var(--radius-sm);
+            font-size: 0.88rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: var(--transition);
+        }
+        .btn-card-cta:hover {
+            background: #0052e0;
+            transform: translateY(-2px);
+        }
+
+        /* Disclaimer Box */
+        .disclaimer-box {
+            background: var(--light-bg);
+            border-left: 4px solid var(--royal-blue);
+            padding: 20px 25px;
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            margin: 60px 0 0;
+            font-size: 0.88rem;
+            color: var(--muted-gray);
+        }
+
+        /* Bottom Call to Action */
+        .cta-banner {
+            background: linear-gradient(135deg, var(--royal-blue) 0%, #0d4bc3 100%);
+            color: white;
+            border-radius: var(--radius-lg);
+            padding: 50px 40px;
+            text-align: center;
+            margin: 70px auto 0;
+            max-width: 1100px;
+            box-shadow: 0 15px 35px rgba(23, 105, 255, 0.25);
+        }
+        .cta-banner h2 { font-size: 2rem; font-weight: 800; margin-bottom: 12px; }
+        .cta-banner p { max-width: 600px; margin: 0 auto 25px; opacity: 0.9; }
+        .btn-cta {
+            background: white;
+            color: var(--royal-blue);
+            font-weight: 700;
+            padding: 12px 28px;
+            border-radius: var(--radius-sm);
+            display: inline-block;
+            transition: var(--transition);
+        }
+        .btn-cta:hover { background: var(--light-bg); transform: translateY(-2px); }
+
+        /* Footer */
+        footer {
+            background: #0B1D2D;
+            color: rgba(255, 255, 255, 0.75);
+            padding: 80px 5% 30px;
+            font-size: 0.92rem;
+            margin-top: 80px;
+        }
+        .footer-grid {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 50px;
+            margin-bottom: 60px;
+        }
+        .footer-col h4 {
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 22px;
+        }
+        .footer-links { display: flex; flex-direction: column; gap: 12px; }
+        .footer-links a:hover { color: var(--bright-cyan); padding-left: 5px; }
+        .footer-bottom {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 992px) {
+            .services-grid { grid-template-columns: 1fr 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 768px) {
+            .services-grid { grid-template-columns: 1fr; }
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: white;
+                flex-direction: column;
+                padding: 40px;
+                transition: 0.4s ease;
+                align-items: flex-start;
+            }
+            .nav-links.active { left: 0; }
+            .mobile-toggle { display: block; }
+            .top-bar-info span:nth-child(2) { display: none; }
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Announcement Bar -->
+    <div class="top-bar">
+        <span><i class="fa-solid fa-shield-halved"></i> Reliable Deliveries. Worldwide Connections.</span>
+        <div class="top-bar-info">
+            <span><i class="fa-solid fa-headset"></i> Customer Service Hotline</span>
+            <span><i class="fa-solid fa-globe"></i> Global Network</span>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                <div class="logo-icon"><i class="fa-solid fa-plane-departure"></i></div>
+                <span>Geoshippings</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li class="dropdown">
+                    <a href="services.html" class="active">Services <i class="fa-solid fa-chevron-down" style="font-size:0.75rem;"></i></a>
+                    <div class="dropdown-menu">
+                        <a href="services.html#express">Express Courier</a>
+                        <a href="services.html#air">Air Cargo</a>
+                        <a href="services.html#ocean">Ocean Freight</a>
+                        <a href="services.html#fulfillment">Fulfillment & Warehousing</a>
+                    </div>
+                </li>
+                <li><a href="tracking.html">Track Shipment</a></li>
+                <li><a href="calculator.html">Shipping Calculator</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="quote.html" class="btn-header">Book a Shipment</a></li>
+            </ul>
+            <div class="mobile-toggle" id="mobileToggle">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header & Breadcrumbs -->
+    <section class="page-header">
+        <h1>Global Courier & Freight Services</h1>
+        <div class="breadcrumbs">
+            <a href="index.html">Home</a>
+            <span>/</span>
+            <span>Services</span>
+        </div>
+    </section>
+
+    <!-- Main Services Content -->
+    <main class="container">
+        
+        <!-- Interactive Service Filter Tabs -->
+        <div class="filter-wrapper">
+            <button class="filter-btn active" onclick="filterServices('all', this)">All Services</button>
+            <button class="filter-btn" onclick="filterServices('express', this)">Express & Courier</button>
+            <button class="filter-btn" onclick="filterServices('freight', this)">Freight & Cargo</button>
+            <button class="filter-btn" onclick="filterServices('logistics', this)">Contract Logistics</button>
+        </div>
+
+        <!-- Services Grid -->
+        <div class="services-grid" id="servicesGrid">
+            
+            <!-- Service 1: Domestic Courier -->
+            <div class="service-card" data-category="express" id="domestic">
+                <div class="service-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1580674285054-bed31e145f59?auto=format&fit=crop&w=800&q=80" alt="Domestic Courier Delivery Van">
+                    <span class="service-badge">Courier</span>
+                </div>
+                <div class="service-body">
+                    <h3 class="service-title"><i class="fa-solid fa-truck-fast"></i> Domestic Courier Delivery</h3>
+                    <p class="service-desc">Fast and secure door-to-door parcel delivery across national routes with guaranteed next-day or standard delivery schedules.</p>
+                    <div class="service-benefits">
+                        <h5>Service Highlights</h5>
+                        <ul>
+                            <li><i class="fa-solid fa-check"></i> Door-to-door pickup & dropoff</li>
+                            <li><i class="fa-solid fa-check"></i> Signature confirmation on receipt</li>
+                            <li><i class="fa-solid fa-check"></i> Real-time status notifications</li>
+                        </ul>
+                    </div>
+                    <div class="service-footer">
+                        <span class="eta-tag"><i class="fa-solid fa-clock"></i> Est. 24–48 Hours</span>
+                        <a href="quote.html?service=domestic" class="btn-card-cta">Request Quote <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 2: International Shipping -->
+            <div class="service-card" data-category="freight" id="international">
+                <div class="service-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80" alt="International Shipping Container Ship">
+                    <span class="service-badge">Worldwide</span>
+                </div>
+                <div class="service-body">
+                    <h3 class="service-title"><i class="fa-solid fa-globe"></i> International Shipping</h3>
+                    <p class="service-desc">Comprehensive cross-border parcel and freight dispatching supported by streamlined customs brokerage and document handling.</p>
+                    <div class="service-benefits">
+                        <h5>Service Highlights</h5>
+                        <ul>
+                            <li><i class="fa-solid fa-check"></i> Coverage across 150+ countries</li>
+                            <li><i class="fa-solid fa-check"></i> Duty & customs declaration support</li>
+                            <li><i class="fa-solid fa-check"></i> End-to-end GPS monitoring</li>
+                        </ul>
+                    </div>
+                    <div class="service-footer">
+                        <span class="eta-tag"><i class="fa-solid fa-clock"></i> Est. 3–7 Business Days</span>
+                        <a href="quote.html?service=international" class="btn-card-cta">Request Quote <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 3: Express Air Freight -->
+            <div class="service-card" data-category="express" id="express">
+                <div class="service-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1542296332-2e4473faf563?auto=format&fit=crop&w=800&q=80" alt="Cargo Plane Loading">
+                    <span class="service-badge">Air Express</span>
+                </div>
+                <div class="service-body">
+                    <h3 class="service-title"><i class="fa-solid fa-plane-departure"></i> Air Cargo & Express</h3>
+                    <p class="service-desc">High-priority air transport for urgent commercial freight, medical shipments, and high-value cargo arriving on deadline.</p>
+                    <div class="service-benefits">
+                        <h5>Service Highlights</h5>
+                        <ul>
+                            <li><i class="fa-solid fa-check"></i> Direct flight routing options</li>
+                            <li><i class="fa-solid fa-check"></i> Temperature-sensitive handling</li>
+                            <li><i class="fa-solid fa-check"></i> Priority airport clearance</li>
+                        </ul>
+                    </div>
+                    <div class="service-footer">
+                        <span class="eta-tag"><i class="fa-solid fa-clock"></i> Est. 1–3 Days</span>
+                        <a href="quote.html?service=air-express" class="btn-card-cta">Request Quote <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 4: Ocean Freight -->
+            <div class="service-card" data-category="freight" id="ocean">
+                <div class="service-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?auto=format&fit=crop&w=800&q=80" alt="Ocean Container Cargo Ship">
+                    <span class="service-badge">Sea Freight</span>
+                </div>
+                <div class="service-body">
+                    <h3 class="service-title"><i class="fa-solid fa-ship"></i> Ocean Freight Shipping</h3>
+                    <p class="service-desc">Economical long-distance transport for heavy machinery, bulk goods, FCL (Full Container Load) and LCL (Less Container Load).</p>
+                    <div class="service-benefits">
+                        <h5>Service Highlights</h5>
+                        <ul>
+                            <li><i class="fa-solid fa-check"></i> FCL & LCL container options</li>
+                            <li><i class="fa-solid fa-check"></i> Port-to-port and door delivery</li>
+                            <li><i class="fa-solid fa-check"></i> Optimized bulk pricing structures</li>
+                        </ul>
+                    </div>
+                    <div class="service-footer">
+                        <span class="eta-tag"><i class="fa-solid fa-clock"></i> Est. 14–30 Days</span>
+                        <a href="quote.html?service=ocean" class="btn-card-cta">Request Quote <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 5: E-commerce Fulfillment -->
+            <div class="service-card" data-category="logistics" id="fulfillment">
+                <div class="service-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80" alt="Warehouse Order Picking">
+                    <span class="service-badge">E-Commerce</span>
+                </div>
+                <div class="service-body">
+                    <h3 class="service-title"><i class="fa-solid fa-boxes-packing"></i> E-commerce Fulfillment</h3>
+                    <p class="service-desc">Complete multi-channel store integration, inventory syncing, automated order pick-and-pack, and rapid customer dispatch.</p>
+                    <div class="service-benefits">
+                        <h5>Service Highlights</h5>
+                        <ul>
+                            <li><i class="fa-solid fa-check"></i> Automated order API connectivity</li>
+                            <li><i class="fa-solid fa-check"></i> Custom branded packaging options</li>
+                            <li><i class="fa-solid fa-check"></i> Streamlined return management</li>
+                        </ul>
+                    </div>
+                    <div class="service-footer">
+                        <span class="eta-tag"><i class="fa-solid fa-clock"></i> Same-Day Dispatch</span>
+                        <a href="quote.html?service=fulfillment" class="btn-card-cta">Request Quote <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 6: Warehousing & Storage -->
+            <div class="service-card" data-category="logistics" id="warehousing">
+                <div class="service-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=800&q=80" alt="Logistics Warehouse Storage Racks">
+                    <span class="service-badge">Storage</span>
+                </div>
+                <div class="service-body">
+                    <h3 class="service-title"><i class="fa-solid fa-warehouse"></i> Warehousing & Storage</h3>
+                    <p class="service-desc">Secure, climate-monitored facilities with short-term buffer storage, pallet warehousing, and long-term asset management.</p>
+                    <div class="service-benefits">
+                        <h5>Service Highlights</h5>
+                        <ul>
+                            <li><i class="fa-solid fa-check"></i> 24/7 CCTV & security monitoring</li>
+                            <li><i class="fa-solid fa-check"></i> Climate-controlled storage bays</li>
+                            <li><i class="fa-solid fa-check"></i> Real-time inventory tracking</li>
+                        </ul>
+                    </div>
+                    <div class="service-footer">
+                        <span class="eta-tag"><i class="fa-solid fa-clock"></i> Flexible Duration</span>
+                        <a href="quote.html?service=warehousing" class="btn-card-cta">Request Quote <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 7: Same-Day Delivery -->
+            <div class="service-card" data-category="express" id="sameday">
+                <div class="service-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1526367790999-0150786686a2?auto=format&fit=crop&w=800&q=80" alt="Courier Bike and Van Urban Delivery">
+                    <span class="service-badge">Ultra-Fast</span>
+                </div>
+                <div class="service-body">
+                    <h3 class="service-title"><i class="fa-solid fa-stopwatch"></i> Same-Day Delivery</h3>
+                    <p class="service-desc">Urgent intra-city delivery service for time-sensitive contracts, legal documents, spare parts, and immediate customer orders.</p>
+                    <div class="service-benefits">
+                        <h5>Service Highlights</h5>
+                        <ul>
+                            <li><i class="fa-solid fa-check"></i> Direct courier dispatch</li>
+                            <li><i class="fa-solid fa-check"></i> Guaranteed arrival timeframe</li>
+                            <li><i class="fa-solid fa-check"></i> SMS alert confirmation</li>
+                        </ul>
+                    </div>
+                    <div class="service-footer">
+                        <span class="eta-tag"><i class="fa-solid fa-clock"></i> Under 6 Hours</span>
+                        <a href="quote.html?service=sameday" class="btn-card-cta">Request Quote <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 8: Corporate Logistics -->
+            <div class="service-card" data-category="logistics" id="corporate">
+                <div class="service-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80" alt="Corporate Logistics Planning Meeting">
+                    <span class="service-badge">B2B Service</span>
+                </div>
+                <div class="service-body">
+                    <h3 class="service-title"><i class="fa-solid fa-building-user"></i> Corporate Logistics</h3>
+                    <p class="service-desc">Dedicated contract supply chain management, account-based billing, custom reporting, and recurring courier routes for businesses.</p>
+                    <div class="service-benefits">
+                        <h5>Service Highlights</h5>
+                        <ul>
+                            <li><i class="fa-solid fa-check"></i> Dedicated account manager</li>
+                            <li><i class="fa-solid fa-check"></i> Volume freight discount rates</li>
+                            <li><i class="fa-solid fa-check"></i> Consolidated monthly invoicing</li>
+                        </ul>
+                    </div>
+                    <div class="service-footer">
+                        <span class="eta-tag"><i class="fa-solid fa-clock"></i> Tailored Agreement</span>
+                        <a href="quote.html?service=corporate" class="btn-card-cta">Request Quote <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Disclaimers Notice -->
+        <div class="disclaimer-box">
+            <i class="fa-solid fa-circle-info" style="color: var(--royal-blue); margin-right: 8px;"></i>
+            <strong>Service Availability Disclosure:</strong> Delivery promises, timeframes, and specific service options listed above represent standard operational estimates. Final availability and rates depend on origin/destination pairs, parcel volume, customs requirements, and weather conditions.
+        </div>
+
+        <!-- Bottom CTA -->
+        <div class="cta-banner">
+            <h2>Need a Custom Freight & Logistics Quote?</h2>
+            <p>Our interactive quote wizard calculates exact rates based on package weight, dimensions, and preferred delivery velocity.</p>
+            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                <a href="quote.html" class="btn-cta"><i class="fa-solid fa-paper-plane"></i> Book a Shipment</a>
+                <a href="calculator.html" class="btn-cta" style="background: transparent; color: white; border: 2px solid white;"><i class="fa-solid fa-calculator"></i> Rate Calculator</a>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <a href="index.html" class="logo" style="color: white; margin-bottom: 18px;">
+                    <div class="logo-icon"><i class="fa-solid fa-plane-departure"></i></div>
+                    <span>Geoshippings</span>
+                </a>
+                <p style="margin-top: 15px;">Moving Your World, One Delivery at a Time. Express parcel courier, international cargo freight, and contract supply chain management.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="tracking.html">Track Shipment</a></li>
+                    <li><a href="calculator.html">Rate Calculator</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Support</h4>
+                <ul class="footer-links">
+                    <li><a href="contact.html">Contact Support</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="quote.html">Book Delivery</a></li>
+                    <li><a href="404.html">System Status</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Info</h4>
+                <p><i class="fa-solid fa-location-dot" style="margin-right: 8px;"></i> Global Freight Hub</p>
+                <p style="margin-top: 10px;"><i class="fa-solid fa-envelope" style="margin-right: 8px;"></i> support@geoshippings-demo.com</p>
+                <p style="margin-top: 10px;"><i class="fa-solid fa-phone" style="margin-right: 8px;"></i> +1 (800) 555-GEO-SHIP</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div>&copy; 2026 Geoshippings Logistics. All rights reserved. (Frontend Interactive Showcase)</div>
+            <div style="display: flex; gap: 15px;">
+                <a href="#" style="color: white;"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#" style="color: white;"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#" style="color: white;"><i class="fa-brands fa-linkedin"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Filter & Navigation Script -->
+    <script>
+        // Mobile Navigation Menu Toggle
+        const mobileToggle = document.getElementById('mobileToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        if (mobileToggle) {
+            mobileToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                const icon = mobileToggle.querySelector('i');
+                if (navLinks.classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-xmark');
+                } else {
+                    icon.classList.remove('fa-xmark');
+                    icon.classList.add('fa-bars');
+                }
+            });
+        }
+
+        // Service Category Filtering Function
+        function filterServices(category, btnElement) {
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            if (btnElement) btnElement.classList.add('active');
+
+            const cards = document.querySelectorAll('.service-card');
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
