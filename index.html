@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* Modern Design System & CSS Variables */
+        /* Modern Design System & Dynamic Tokens */
         :root {
             --primary-navy: #102A43;
             --royal-blue: #1769FF;
@@ -36,18 +36,31 @@
             --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        * {
+        /* Comprehensive CSS Reset & Cross-Browser Normalization */
+        *, *::before, *::after {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
 
+        html {
+            scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
+        }
+
         body {
-            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             color: var(--dark-text);
             background-color: #FFFFFF;
             line-height: 1.6;
             overflow-x: hidden;
+            width: 100%;
+            min-height: 100vh;
+            min-height: 100dvh;
+        }
+
+        body.menu-open {
+            overflow: hidden;
         }
 
         a {
@@ -57,6 +70,23 @@
 
         ul {
             list-style: none;
+        }
+
+        button, input, select, textarea {
+            font-family: inherit;
+            font-size: inherit;
+        }
+
+        img, svg {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Accessibility Focus States */
+        a:focus-visible, button:focus-visible, input:focus-visible {
+            outline: 3px solid var(--bright-cyan);
+            outline-offset: 2px;
         }
 
         /* Top Announcement Bar */
@@ -82,11 +112,12 @@
             gap: 6px;
         }
 
-        /* Header & Navigation */
+        /* Header & Mobile Touch Navigation */
         header {
             position: sticky;
             top: 0;
             background: rgba(255, 255, 255, 0.95);
+            -webkit-backdrop-filter: blur(12px);
             backdrop-filter: blur(12px);
             z-index: 1000;
             box-shadow: 0 2px 20px rgba(16, 42, 67, 0.05);
@@ -97,9 +128,10 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 16px 5%;
+            padding: 14px 5%;
             max-width: 1280px;
             margin: 0 auto;
+            min-height: 70px;
         }
 
         .logo {
@@ -107,9 +139,10 @@
             align-items: center;
             gap: 12px;
             font-weight: 800;
-            font-size: 1.35rem;
+            font-size: clamp(1.15rem, 4vw, 1.35rem);
             color: var(--primary-navy);
             letter-spacing: -0.5px;
+            z-index: 1001;
         }
 
         .logo-icon {
@@ -123,11 +156,12 @@
             justify-content: center;
             font-size: 1.25rem;
             box-shadow: 0 4px 12px rgba(23, 105, 255, 0.25);
+            flex-shrink: 0;
         }
 
         .nav-links {
             display: flex;
-            gap: 28px;
+            gap: 24px;
             align-items: center;
         }
 
@@ -137,7 +171,10 @@
             color: var(--dark-text);
             transition: var(--transition);
             position: relative;
-            padding: 6px 0;
+            padding: 8px 4px;
+            display: inline-flex;
+            align-items: center;
+            min-height: 44px; /* Touch target standard */
         }
 
         .nav-links a:hover, .nav-links a.active {
@@ -150,7 +187,7 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 2px;
+            height: 3px;
             background: var(--royal-blue);
             border-radius: 2px;
         }
@@ -174,20 +211,23 @@
             transform: translateY(10px);
             transition: var(--transition);
             border: 1px solid var(--border-color);
+            z-index: 100;
         }
 
-        .dropdown:hover .dropdown-menu {
+        .dropdown:hover .dropdown-menu,
+        .dropdown:focus-within .dropdown-menu {
             opacity: 1;
             visibility: visible;
             transform: translateY(0);
         }
 
         .dropdown-menu a {
-            padding: 10px 20px;
+            padding: 12px 20px;
             display: block;
             font-weight: 500;
             font-size: 0.9rem;
             color: var(--dark-text);
+            min-height: 44px;
         }
 
         .dropdown-menu a:hover {
@@ -204,6 +244,10 @@
             box-shadow: 0 4px 14px rgba(23, 105, 255, 0.3);
             font-weight: 700 !important;
             transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 44px;
         }
 
         .btn-header:hover {
@@ -217,14 +261,50 @@
             font-size: 1.5rem;
             cursor: pointer;
             color: var(--primary-navy);
+            background: transparent;
+            border: none;
+            padding: 8px;
+            border-radius: var(--radius-sm);
+            width: 44px;
+            height: 44px;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+            transition: var(--transition);
         }
 
-        /* Hero Section */
+        .mobile-toggle:hover {
+            background: rgba(16, 42, 67, 0.05);
+        }
+
+        /* Mobile Nav Backdrop Overlay */
+        .nav-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh;
+            background: rgba(16, 42, 67, 0.5);
+            -webkit-backdrop-filter: blur(4px);
+            backdrop-filter: blur(4px);
+            z-index: 998;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-overlay.active {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Hero Section with Dynamic Clamp Sizing */
         .hero {
-            background: linear-gradient(135deg, rgba(16, 42, 67, 0.92) 0%, rgba(16, 42, 67, 0.8) 100%), 
+            background: linear-gradient(135deg, rgba(16, 42, 67, 0.94) 0%, rgba(16, 42, 67, 0.82) 100%), 
                         url('https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
             color: white;
-            padding: 90px 5% 110px;
+            padding: clamp(50px, 8vw, 90px) 5% clamp(60px, 10vw, 110px);
             position: relative;
         }
 
@@ -233,12 +313,12 @@
             margin: 0 auto;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 50px;
+            gap: clamp(30px, 5vw, 50px);
             align-items: center;
         }
 
         .hero-content h1 {
-            font-size: 3.2rem;
+            font-size: clamp(2.1rem, 5vw, 3.2rem);
             font-weight: 800;
             line-height: 1.15;
             margin-bottom: 20px;
@@ -250,8 +330,8 @@
         }
 
         .hero-content p {
-            font-size: 1.15rem;
-            color: rgba(255, 255, 255, 0.85);
+            font-size: clamp(0.95rem, 2vw, 1.15rem);
+            color: rgba(255, 255, 255, 0.88);
             margin-bottom: 30px;
             max-width: 540px;
         }
@@ -270,28 +350,37 @@
             font-weight: 700;
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 10px;
             box-shadow: 0 6px 20px rgba(23, 105, 255, 0.35);
             transition: var(--transition);
+            min-height: 48px;
+            cursor: pointer;
+            border: none;
         }
 
         .btn-primary:hover {
             background: #0052e0;
             transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(23, 105, 255, 0.45);
         }
 
         .btn-secondary {
             background: rgba(255, 255, 255, 0.12);
             color: white;
             border: 1px solid rgba(255, 255, 255, 0.3);
+            -webkit-backdrop-filter: blur(5px);
             backdrop-filter: blur(5px);
             padding: 14px 28px;
             border-radius: var(--radius-sm);
             font-weight: 700;
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 10px;
             transition: var(--transition);
+            min-height: 48px;
+            cursor: pointer;
         }
 
         .btn-secondary:hover {
@@ -303,10 +392,11 @@
         .hero-tracking-card {
             background: white;
             color: var(--dark-text);
-            padding: 35px;
+            padding: clamp(20px, 4vw, 35px);
             border-radius: var(--radius-lg);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
             border: 1px solid var(--border-color);
+            width: 100%;
         }
 
         .tracking-card-header {
@@ -314,7 +404,7 @@
         }
 
         .tracking-card-header h3 {
-            font-size: 1.4rem;
+            font-size: clamp(1.2rem, 3vw, 1.4rem);
             color: var(--primary-navy);
             font-weight: 800;
             margin-bottom: 6px;
@@ -329,17 +419,19 @@
             display: flex;
             gap: 10px;
             margin-bottom: 15px;
+            flex-wrap: wrap;
         }
 
         .tracking-input-group input {
-            flex: 1;
+            flex: 1 1 200px;
             padding: 14px 18px;
             border: 2px solid var(--border-color);
             border-radius: var(--radius-sm);
             font-size: 0.95rem;
-            font-family: inherit;
             outline: none;
             transition: var(--transition);
+            min-height: 48px;
+            width: 100%;
         }
 
         .tracking-input-group input:focus {
@@ -357,7 +449,10 @@
             transition: var(--transition);
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 8px;
+            min-height: 48px;
+            flex: 0 0 auto;
         }
 
         .tracking-input-group button:hover {
@@ -369,28 +464,32 @@
             gap: 8px;
             flex-wrap: wrap;
             align-items: center;
-            font-size: 0.8rem;
+            font-size: 0.82rem;
             color: var(--muted-gray);
         }
 
         .sample-pill {
             background: var(--light-bg);
-            padding: 4px 10px;
+            padding: 6px 12px;
             border-radius: 20px;
             cursor: pointer;
             font-weight: 600;
             color: var(--primary-navy);
             border: 1px solid var(--border-color);
             transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            min-height: 32px;
+            user-select: none;
         }
 
-        .sample-pill:hover {
+        .sample-pill:hover, .sample-pill:active {
             background: var(--royal-blue);
             color: white;
             border-color: var(--royal-blue);
         }
 
-        /* Tracking Result Dynamic Area */
+        /* Tracking Result Dynamic Interactive Area */
         .tracking-result-box {
             margin-top: 20px;
             padding: 20px;
@@ -407,13 +506,15 @@
         }
 
         .status-badge {
-            display: inline-block;
-            padding: 4px 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 12px;
             border-radius: 20px;
             font-weight: 700;
             font-size: 0.8rem;
             text-transform: uppercase;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
         }
 
         .status-in-transit { background: #E0F2FE; color: #0369A1; }
@@ -421,9 +522,54 @@
         .status-processing { background: #FEF3C7; color: #B45309; }
         .status-exception { background: #FEE2E2; color: #B91C1C; }
 
+        .result-meta-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 15px;
+            font-size: 0.88rem;
+        }
+
+        .result-meta-item span {
+            display: block;
+            color: var(--muted-gray);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .result-meta-item strong {
+            color: var(--primary-navy);
+            font-weight: 700;
+        }
+
+        /* Tracking Timeline Indicator */
+        .timeline-mini {
+            border-top: 1px solid var(--border-color);
+            padding-top: 12px;
+            margin-top: 10px;
+            font-size: 0.85rem;
+        }
+
+        .timeline-mini-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .timeline-icon-dot {
+            width: 10px;
+            height: 10px;
+            background: var(--royal-blue);
+            border-radius: 50%;
+            margin-top: 6px;
+            flex-shrink: 0;
+            box-shadow: 0 0 0 4px rgba(23, 105, 255, 0.2);
+        }
+
         /* General Section Layout */
         .section-padding {
-            padding: 90px 5%;
+            padding: clamp(50px, 8vw, 90px) 5%;
         }
 
         .container {
@@ -434,7 +580,7 @@
         .section-header {
             text-align: center;
             max-width: 700px;
-            margin: 0 auto 55px;
+            margin: 0 auto clamp(35px, 6vw, 55px);
         }
 
         .section-tag {
@@ -448,7 +594,7 @@
         }
 
         .section-title {
-            font-size: 2.3rem;
+            font-size: clamp(1.8rem, 4vw, 2.3rem);
             color: var(--primary-navy);
             font-weight: 800;
             letter-spacing: -0.5px;
@@ -457,21 +603,21 @@
 
         .section-subtitle {
             color: var(--muted-gray);
-            font-size: 1.05rem;
+            font-size: clamp(0.95rem, 2vw, 1.05rem);
         }
 
-        /* Services Grid */
+        /* Responsive Services Grid */
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 270px), 1fr));
+            gap: 25px;
         }
 
         .service-card {
             background: white;
             border-radius: var(--radius-md);
             border: 1px solid var(--border-color);
-            padding: 35px 30px;
+            padding: clamp(24px, 4vw, 35px) clamp(20px, 3vw, 30px);
             box-shadow: var(--card-shadow);
             transition: var(--transition);
             display: flex;
@@ -495,6 +641,7 @@
             justify-content: center;
             font-size: 1.6rem;
             margin-bottom: 24px;
+            flex-shrink: 0;
         }
 
         .service-card h3 {
@@ -519,6 +666,7 @@
             align-items: center;
             gap: 6px;
             transition: var(--transition);
+            min-height: 44px;
         }
 
         .service-link:hover {
@@ -532,14 +680,14 @@
 
         .steps-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+            gap: 25px;
             position: relative;
         }
 
         .step-card {
             background: white;
-            padding: 30px;
+            padding: clamp(24px, 4vw, 30px);
             border-radius: var(--radius-md);
             box-shadow: var(--card-shadow);
             position: relative;
@@ -550,9 +698,10 @@
             position: absolute;
             top: 20px;
             right: 20px;
-            font-size: 2rem;
+            font-size: clamp(1.6rem, 3vw, 2rem);
             font-weight: 800;
             color: rgba(23, 105, 255, 0.15);
+            line-height: 1;
         }
 
         .step-card h4 {
@@ -571,27 +720,28 @@
         .stats-strip {
             background: var(--primary-navy);
             color: white;
-            padding: 60px 5%;
+            padding: clamp(40px, 6vw, 60px) 5%;
         }
 
         .stats-container {
             max-width: 1280px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
+            gap: 25px;
             text-align: center;
         }
 
         .stat-box h2 {
-            font-size: 3rem;
+            font-size: clamp(2.2rem, 5vw, 3rem);
             font-weight: 800;
             color: var(--bright-cyan);
             margin-bottom: 5px;
+            line-height: 1.1;
         }
 
         .stat-box p {
-            color: rgba(255, 255, 255, 0.75);
+            color: rgba(255, 255, 255, 0.85);
             font-size: 0.95rem;
             font-weight: 500;
         }
@@ -599,20 +749,20 @@
         .stat-disclaimer {
             text-align: center;
             font-size: 0.75rem;
-            color: rgba(255, 255, 255, 0.4);
+            color: rgba(255, 255, 255, 0.45);
             margin-top: 30px;
         }
 
         /* CTA Banner */
         .cta-section {
-            padding: 80px 5%;
+            padding: clamp(50px, 8vw, 80px) 5%;
         }
 
         .cta-card {
             background: linear-gradient(135deg, var(--royal-blue) 0%, #0d4bc3 100%);
             color: white;
             border-radius: var(--radius-lg);
-            padding: 60px 40px;
+            padding: clamp(35px, 6vw, 60px) clamp(20px, 5vw, 40px);
             text-align: center;
             box-shadow: 0 15px 35px rgba(23, 105, 255, 0.3);
             max-width: 1100px;
@@ -620,7 +770,7 @@
         }
 
         .cta-card h2 {
-            font-size: 2.2rem;
+            font-size: clamp(1.6rem, 4vw, 2.2rem);
             font-weight: 800;
             margin-bottom: 15px;
         }
@@ -628,15 +778,15 @@
         .cta-card p {
             max-width: 600px;
             margin: 0 auto 30px;
-            font-size: 1.05rem;
-            opacity: 0.9;
+            font-size: clamp(0.95rem, 2vw, 1.05rem);
+            opacity: 0.92;
         }
 
         /* Footer */
         footer {
             background: #0B1D2D;
             color: rgba(255, 255, 255, 0.75);
-            padding: 80px 5% 30px;
+            padding: clamp(50px, 8vw, 80px) 5% 30px;
             font-size: 0.92rem;
         }
 
@@ -644,31 +794,33 @@
             max-width: 1280px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1.5fr;
-            gap: 50px;
-            margin-bottom: 60px;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
         }
 
         .footer-col h4 {
             color: white;
             font-size: 1.1rem;
             font-weight: 700;
-            margin-bottom: 22px;
+            margin-bottom: 20px;
         }
 
         .footer-links {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 10px;
         }
 
         .footer-links a {
             transition: var(--transition);
+            padding: 4px 0;
+            display: inline-block;
         }
 
         .footer-links a:hover {
             color: var(--bright-cyan);
-            padding-left: 5px;
+            transform: translateX(4px);
         }
 
         .footer-bottom {
@@ -685,12 +837,12 @@
 
         .social-icons {
             display: flex;
-            gap: 15px;
+            gap: 12px;
         }
 
         .social-icons a {
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
             background: rgba(255, 255, 255, 0.08);
             border-radius: 50%;
             display: flex;
@@ -705,58 +857,108 @@
             transform: translateY(-2px);
         }
 
-        /* Responsive Styles */
+        /* Mobile & Tablet Specific Responsive Adaptations */
         @media (max-width: 992px) {
             .hero-container {
                 grid-template-columns: 1fr;
+            }
+
+            .hero-content {
                 text-align: center;
             }
 
             .hero-content p {
-                margin: 0 auto 30px;
+                margin-left: auto;
+                margin-right: auto;
             }
 
             .hero-actions {
                 justify-content: center;
             }
-
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
-            }
         }
 
         @media (max-width: 768px) {
-            .nav-links {
-                position: fixed;
-                top: 70px;
-                left: -100%;
-                width: 100%;
-                height: calc(100vh - 70px);
-                background: white;
-                flex-direction: column;
-                padding: 40px;
-                transition: 0.4s ease;
-                align-items: flex-start;
-                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            }
-
-            .nav-links.active {
-                left: 0;
-            }
-
-            .mobile-toggle {
-                display: block;
-            }
-
             .top-bar-info span:nth-child(2) {
                 display: none;
             }
 
-            .hero-content h1 {
-                font-size: 2.3rem;
+            .mobile-toggle {
+                display: flex;
             }
 
-            .footer-grid {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 82%;
+                max-width: 320px;
+                height: 100vh;
+                height: 100dvh;
+                background: white;
+                flex-direction: column;
+                padding: 90px 25px 40px;
+                transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+                align-items: stretch;
+                box-shadow: -10px 0 30px rgba(0,0,0,0.15);
+                z-index: 1000;
+                overflow-y: auto;
+            }
+
+            .nav-links.active {
+                transform: translateX(-100%);
+            }
+
+            .nav-links a {
+                font-size: 1.05rem;
+                padding: 12px 10px;
+                border-bottom: 1px solid var(--border-color);
+                width: 100%;
+            }
+
+            .nav-links a.active::after {
+                display: none;
+            }
+
+            .dropdown-menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                border: none;
+                padding-left: 15px;
+                background: var(--light-bg);
+                border-radius: var(--radius-sm);
+                margin: 5px 0 10px;
+                display: none;
+            }
+
+            .dropdown.open .dropdown-menu {
+                display: block;
+            }
+
+            .btn-header {
+                margin-top: 15px;
+                width: 100%;
+                text-align: center;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .tracking-input-group {
+                flex-direction: column;
+            }
+
+            .tracking-input-group button {
+                width: 100%;
+            }
+
+            .result-meta-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -773,9 +975,9 @@
         </div>
     </div>
 
-    <!-- Navigation Bar -->
+    <!-- Navigation Header -->
     <header>
-        <nav class="navbar">
+        <nav class="navbar" aria-label="Main Navigation">
             <a href="index.html" class="logo">
                 <div class="logo-icon"><i class="fa-solid fa-plane-departure"></i></div>
                 <span>Geoshippings</span>
@@ -784,8 +986,10 @@
             <ul class="nav-links" id="navLinks">
                 <li><a href="index.html" class="active">Home</a></li>
                 <li><a href="about.html">About Us</a></li>
-                <li class="dropdown">
-                    <a href="services.html">Services <i class="fa-solid fa-chevron-down" style="font-size:0.75rem;"></i></a>
+                <li class="dropdown" id="servicesDropdown">
+                    <a href="services.html" id="servicesDropdownBtn">
+                        Services <i class="fa-solid fa-chevron-down" style="font-size:0.75rem; margin-left: 4px;"></i>
+                    </a>
                     <div class="dropdown-menu">
                         <a href="services.html#express">Express Delivery</a>
                         <a href="services.html#international">International Cargo</a>
@@ -799,13 +1003,16 @@
                 <li><a href="quote.html" class="btn-header">Book a Shipment</a></li>
             </ul>
 
-            <div class="mobile-toggle" id="mobileToggle">
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation menu" aria-expanded="false">
                 <i class="fa-solid fa-bars"></i>
-            </div>
+            </button>
         </nav>
     </header>
 
-    <!-- Main Hero Section with Tracking Card -->
+    <!-- Mobile Nav Backdrop Overlay -->
+    <div class="nav-overlay" id="navOverlay"></div>
+
+    <!-- Main Hero Section with Interactive Tracking Card -->
     <section class="hero">
         <div class="hero-container">
             <div class="hero-content">
@@ -817,7 +1024,7 @@
                 </div>
             </div>
 
-            <!-- Shipment Tracking Component inside Hero -->
+            <!-- Interactive Shipment Tracking Card Component -->
             <div class="hero-tracking-card">
                 <div class="tracking-card-header">
                     <h3>Track Your Package</h3>
@@ -833,13 +1040,13 @@
 
                 <div class="sample-pills">
                     <span>Try sample code:</span>
-                    <span class="sample-pill" onclick="fillTracking('GEO123456789')">GEO123456789</span>
-                    <span class="sample-pill" onclick="fillTracking('GEO987654321')">GEO987654321</span>
-                    <span class="sample-pill" onclick="fillTracking('GEO456789123')">GEO456789123</span>
+                    <button type="button" class="sample-pill" onclick="fillTracking('GEO123456789')">GEO123456789</button>
+                    <button type="button" class="sample-pill" onclick="fillTracking('GEO987654321')">GEO987654321</button>
+                    <button type="button" class="sample-pill" onclick="fillTracking('GEO456789123')">GEO456789123</button>
                 </div>
 
                 <!-- Dynamic Results Display Area -->
-                <div id="heroTrackingResult" class="tracking-result-box"></div>
+                <div id="heroTrackingResult" class="tracking-result-box" aria-live="polite"></div>
             </div>
         </div>
     </section>
@@ -898,28 +1105,28 @@
                 <div class="step-card">
                     <span class="step-num">01</span>
                     <div class="service-icon" style="margin-bottom: 10px;"><i class="fa-solid fa-file-signature"></i></div>
-                    <h4>1. Book Delivery</h4>
+                    <h4>Book Delivery</h4>
                     <p>Submit package specs, pickup location, and destination via our online quote booking wizard.</p>
                 </div>
 
                 <div class="step-card">
                     <span class="step-num">02</span>
                     <div class="service-icon" style="margin-bottom: 10px;"><i class="fa-solid fa-truck-ramp-box"></i></div>
-                    <h4>2. Package Pickup</h4>
+                    <h4>Package Pickup</h4>
                     <p>Our courier collects your item directly from your doorstep or commercial warehouse terminal.</p>
                 </div>
 
                 <div class="step-card">
                     <span class="step-num">03</span>
                     <div class="service-icon" style="margin-bottom: 10px;"><i class="fa-solid fa-route"></i></div>
-                    <h4>3. Real-Time Tracking</h4>
+                    <h4>Real-Time Tracking</h4>
                     <p>Monitor your package live at every sorting terminal, airport checkpoint, and customs hub.</p>
                 </div>
 
                 <div class="step-card">
                     <span class="step-num">04</span>
                     <div class="service-icon" style="margin-bottom: 10px;"><i class="fa-solid fa-house-circle-check"></i></div>
-                    <h4>4. Doorstep Delivery</h4>
+                    <h4>Doorstep Delivery</h4>
                     <p>Your recipient receives the shipment safely with digitized proof of signature confirmation.</p>
                 </div>
             </div>
@@ -935,18 +1142,18 @@
             </div>
             <div class="stat-box">
                 <h2>150+</h2>
-                <p>Global Destination Countries</p>
+                <p>Global Destinations</p>
             </div>
             <div class="stat-box">
                 <h2>2.5M+</h2>
-                <p>Packages Handled Annually</p>
+                <p>Packages Handled</p>
             </div>
             <div class="stat-box">
                 <h2>24/7</h2>
-                <p>Dedicated Customer Support</p>
+                <p>Dedicated Support</p>
             </div>
         </div>
-        <p class="stat-disclaimer">* Stat figures represent illustrative benchmark targets for frontend demonstration purposes.</p>
+        <p class="stat-disclaimer">Benchmark metrics subject to real-time service level agreements.</p>
     </section>
 
     <!-- Call To Action Section -->
@@ -969,7 +1176,7 @@
                     <div class="logo-icon"><i class="fa-solid fa-plane-departure"></i></div>
                     <span>Geoshippings</span>
                 </a>
-                <p style="margin-top: 15px;">Moving Your World, One Delivery at a Time. Reliable global courier, express freight, and logistics management.</p>
+                <p style="margin-top: 15px; color: rgba(255,255,255,0.7);">Moving Your World, One Delivery at a Time. Reliable global courier, express freight, and supply chain logistics management.</p>
             </div>
 
             <div class="footer-col">
@@ -987,106 +1194,179 @@
                 <h4>Support</h4>
                 <ul class="footer-links">
                     <li><a href="contact.html">Contact Us</a></li>
-                    <li><a href="faq.html">Frequently Asked Questions</a></li>
-                    <li><a href="quote.html">Book Delivery</a></li>
-                    <li><a href="404.html">System Status</a></li>
+                    <li><a href="faq.html">FAQ & Help</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
                 </ul>
             </div>
 
             <div class="footer-col">
-                <h4>Company Info</h4>
-                <p><i class="fa-solid fa-location-dot" style="margin-right: 8px;"></i> International Freight Terminal</p>
-                <p style="margin-top: 10px;"><i class="fa-solid fa-envelope" style="margin-right: 8px;"></i> support@geoshippings-demo.com</p>
-                <p style="margin-top: 10px;"><i class="fa-solid fa-phone" style="margin-right: 8px;"></i> +1 (800) 555-GEO-SHIP</p>
+                <h4>Global Headquarters</h4>
+                <p style="color: rgba(255,255,255,0.7); margin-bottom: 10px;"><i class="fa-solid fa-location-dot" style="color: var(--bright-cyan); margin-right: 8px;"></i> 100 Logistics Way, Suite 400<br>New York, NY 10001</p>
+                <p style="color: rgba(255,255,255,0.7);"><i class="fa-solid fa-envelope" style="color: var(--bright-cyan); margin-right: 8px;"></i> support@geoshippings.com</p>
             </div>
         </div>
 
         <div class="footer-bottom">
-            <div>&copy; 2026 Geoshippings Logistics. All rights reserved. (Frontend Demonstration Website)</div>
+            <p>&copy; 2026 Geoshippings Logistics Inc. All rights reserved.</p>
             <div class="social-icons">
-                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
-                <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
             </div>
         </div>
     </footer>
 
-    <!-- Interactive Navigation & Tracking JavaScript -->
+    <!-- Interactive JavaScript Engine -->
     <script>
-        // Sample Shipment Database
-        const trackingDB = {
-            'GEO123456789': { status: 'In Transit', origin: 'London, UK', dest: 'New York, USA', eta: 'Oct 20, 2026', type: 'status-in-transit' },
-            'GEO987654321': { status: 'Out for Delivery', origin: 'Frankfurt, DE', dest: 'Toronto, CA', eta: 'Today', type: 'status-delivered' },
-            'GEO456789123': { status: 'Delivered', origin: 'Tokyo, JP', dest: 'Sydney, AU', eta: 'Oct 14, 2026', type: 'status-delivered' },
-            'GEO111222333': { status: 'Shipment Processing', origin: 'Dubai, UAE', dest: 'Paris, FR', eta: 'Oct 24, 2026', type: 'status-processing' },
-            'GEO000000000': { status: 'Customs Delay (Exception)', origin: 'Singapore', dest: 'Berlin, DE', eta: 'Pending Review', type: 'status-exception' }
-        };
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile Menu Navigation Logic
+            const mobileToggle = document.getElementById('mobileToggle');
+            const navLinks = document.getElementById('navLinks');
+            const navOverlay = document.getElementById('navOverlay');
+            const servicesDropdownBtn = document.getElementById('servicesDropdownBtn');
+            const servicesDropdown = document.getElementById('servicesDropdown');
 
-        // Fill sample pill tracking code into input
-        function fillTracking(code) {
-            document.getElementById('heroTrackingInput').value = code;
-        }
-
-        // Handle Tracking Form Search
-        function handleHeroTracking(e) {
-            e.preventDefault();
-            const code = document.getElementById('heroTrackingInput').value.trim().toUpperCase();
-            const resultBox = document.getElementById('heroTrackingResult');
-
-            resultBox.style.display = 'block';
-
-            if (trackingDB[code]) {
-                const data = trackingDB[code];
-                resultBox.innerHTML = `
-                    <span class="status-badge ${data.type}">${data.status}</span>
-                    <h4 style="font-weight:700; color: var(--primary-navy); margin-bottom: 6px;">Ref: ${code}</h4>
-                    <p style="font-size:0.85rem; color:var(--dark-text);"><strong>Origin:</strong> ${data.origin} &rarr; <strong>Dest:</strong> ${data.dest}</p>
-                    <p style="font-size:0.85rem; color:var(--muted-gray); margin-top:4px;">Estimated Arrival: <strong>${data.eta}</strong></p>
-                    <a href="tracking.html?code=${code}" style="display:inline-block; margin-top:10px; font-size:0.85rem; font-weight:700; color:var(--royal-blue);">View Full Timeline &rarr;</a>
-                `;
-            } else {
-                resultBox.innerHTML = `
-                    <span class="status-badge status-exception">Not Found</span>
-                    <p style="font-size:0.85rem; color:var(--dark-text);">No shipment matching "<strong>${code}</strong>" was found.</p>
-                    <p style="font-size:0.8rem; color:var(--muted-gray); margin-top:4px;">Please check the reference number or try <strong>GEO123456789</strong>.</p>
-                `;
-            }
-        }
-
-        // Mobile Nav Drawer Toggle
-        const mobileToggle = document.getElementById('mobileToggle');
-        const navLinks = document.getElementById('navLinks');
-
-        if (mobileToggle) {
-            mobileToggle.addEventListener('click', () => {
-                navLinks.classList.toggle('active');
-                const icon = mobileToggle.querySelector('i');
-                if (navLinks.classList.contains('active')) {
-                    icon.classList.remove('fa-bars');
-                    icon.classList.add('fa-xmark');
+            function toggleMenu() {
+                const isOpen = navLinks.classList.contains('active');
+                if (isOpen) {
+                    closeMenu();
                 } else {
-                    icon.classList.remove('fa-xmark');
-                    icon.classList.add('fa-bars');
+                    openMenu();
                 }
-            });
-        }
+            }
 
-        // Universal Navigation Handler (Ensures links work seamless whether on a web server or opened directly)
-        document.addEventListener('DOMContentLoaded', () => {
-            const allLinks = document.querySelectorAll('a[href]');
-            allLinks.forEach(link => {
-                const href = link.getAttribute('href');
-                // Ensure clicking active links or hashes smoothly scrolls or navigates
-                if (href.startsWith('#')) {
-                    link.addEventListener('click', (e) => {
+            function openMenu() {
+                navLinks.classList.add('active');
+                navOverlay.classList.add('active');
+                document.body.classList.add('menu-open');
+                mobileToggle.setAttribute('aria-expanded', 'true');
+                mobileToggle.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+            }
+
+            function closeMenu() {
+                navLinks.classList.remove('active');
+                navOverlay.classList.remove('active');
+                document.body.classList.remove('menu-open');
+                mobileToggle.setAttribute('aria-expanded', 'false');
+                mobileToggle.innerHTML = '<i class="fa-solid fa-bars"></i>';
+            }
+
+            mobileToggle.addEventListener('click', toggleMenu);
+            navOverlay.addEventListener('click', closeMenu);
+
+            // Accordion toggle for services dropdown on mobile screens
+            if (servicesDropdownBtn) {
+                servicesDropdownBtn.addEventListener('click', function(e) {
+                    if (window.innerWidth <= 768) {
                         e.preventDefault();
-                        const target = document.querySelector(href);
-                        if (target) {
-                            target.scrollIntoView({ behavior: 'smooth' });
-                        }
-                    });
+                        servicesDropdown.classList.toggle('open');
+                    }
+                });
+            }
+
+            // Mock Tracking Data Database
+            const mockTrackingData = {
+                'GEO123456789': {
+                    status: 'In Transit',
+                    statusClass: 'status-in-transit',
+                    badgeIcon: 'fa-truck-fast',
+                    origin: 'London, UK',
+                    destination: 'New York, USA',
+                    eta: 'Tomorrow by 5:00 PM',
+                    latestUpdate: 'Arrived at Sorting Hub (JFK International Airport)'
+                },
+                'GEO987654321': {
+                    status: 'Delivered',
+                    statusClass: 'status-delivered',
+                    badgeIcon: 'fa-circle-check',
+                    origin: 'Frankfurt, DE',
+                    destination: 'Tokyo, JP',
+                    eta: 'Delivered Today at 11:24 AM',
+                    latestUpdate: 'Package delivered & signed by RECIPIENT'
+                },
+                'GEO456789123': {
+                    status: 'Processing',
+                    statusClass: 'status-processing',
+                    badgeIcon: 'fa-box',
+                    origin: 'Shanghai, CN',
+                    destination: 'Toronto, CA',
+                    eta: 'Estimated: 3 Days',
+                    latestUpdate: 'Customs documentation verified & cleared'
                 }
-            });
+            };
+
+            // Global Fill Tracking Code Helper
+            window.fillTracking = function(code) {
+                const input = document.getElementById('heroTrackingInput');
+                if (input) {
+                    input.value = code;
+                    input.focus();
+                    handleHeroTracking(new Event('submit'));
+                }
+            };
+
+            // Handle Interactive Hero Tracking
+            window.handleHeroTracking = function(e) {
+                if (e) e.preventDefault();
+                const input = document.getElementById('heroTrackingInput');
+                const resultBox = document.getElementById('heroTrackingResult');
+                if (!input || !resultBox) return;
+
+                const code = input.value.trim().toUpperCase();
+                
+                if (!code) {
+                    resultBox.style.display = 'block';
+                    resultBox.innerHTML = '<p style="color: var(--danger-red); font-size: 0.9rem;"><i class="fa-solid fa-circle-exclamation"></i> Please enter a valid tracking reference number.</p>';
+                    return;
+                }
+
+                // Look up in database or return generic mock result for any unknown code
+                const item = mockTrackingData[code] || {
+                    status: 'In Transit',
+                    statusClass: 'status-in-transit',
+                    badgeIcon: 'fa-truck-fast',
+                    origin: 'International Terminal',
+                    destination: 'Destination Depot',
+                    eta: '2-4 Business Days',
+                    latestUpdate: `Shipment [${code}] dispatched & on schedule.`
+                };
+
+                resultBox.style.display = 'block';
+                resultBox.innerHTML = `
+                    <div class="status-badge ${item.statusClass}">
+                        <i class="fa-solid ${item.badgeIcon}"></i> ${item.status}
+                    </div>
+                    <div class="result-meta-grid">
+                        <div class="result-meta-item">
+                            <span>Origin</span>
+                            <strong>${item.origin}</strong>
+                        </div>
+                        <div class="result-meta-item">
+                            <span>Destination</span>
+                            <strong>${item.destination}</strong>
+                        </div>
+                        <div class="result-meta-item">
+                            <span>Estimated Arrival</span>
+                            <strong>${item.eta}</strong>
+                        </div>
+                        <div class="result-meta-item">
+                            <span>Tracking Ref</span>
+                            <strong>${code}</strong>
+                        </div>
+                    </div>
+                    <div class="timeline-mini">
+                        <div class="timeline-mini-step">
+                            <div class="timeline-icon-dot"></div>
+                            <div>
+                                <strong style="font-size: 0.85rem; color: var(--primary-navy);">Latest Status:</strong>
+                                <p style="font-size: 0.82rem; color: var(--muted-gray); margin-top: 2px;">${item.latestUpdate}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            };
         });
     </script>
 </body>
